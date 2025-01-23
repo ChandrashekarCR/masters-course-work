@@ -1,0 +1,7 @@
+	Grigori Rasputin	Nicolas II Romanov	Anastasia4 son	Prince Fred	Alexei Romanov	Farmer s grandson
+Grigori Rasputin	0.0	0.812	0.833	0.75	0.875	0.2290000000000001
+Nicolas II Romanov	0.812	0.0	0.917	0.833	0.581	0.771
+Anastasia4 son	0.833	0.917	0.0	0.792	0.917	0.792
+Prince Fred	0.75	0.833	0.792	0.0	0.938	0.708
+Alexei Romanov	0.875	0.581	0.917	0.938	0.0	0.875
+Farmer s grandson	0.2290000000000001	0.771	0.792	0.708	0.875	0.0

@@ -1,0 +1,27 @@
+.
+├── comparison_dendrogram_mt.png
+├── comparison_dendrogram_y.png
+├── comparison_heatmap_mt.png
+├── comparison_heatmap_y.png
+├── data
+│   ├── mtdna_alignment_matrix.txt
+│   ├── mtdna_identity_matrix.txt
+│   ├── y_alignment_matrix.txt
+│   └── y_identity_matrix.txt
+├── environment.yml
+├── results
+│   ├── mt_alignment_dendrogram.png
+│   ├── mt_alignment_heatmap.png
+│   ├── mt_identity_dendrogram.png
+│   ├── mt_identity_heatmap.png
+│   ├── y_alignment_dendrogram.png
+│   ├── y_alignment_heatmap.png
+│   ├── y_identity_dendrogram.png
+│   └── y_identity_heatmap.png
+├── scripts
+│   ├── main.ipynb
+│   ├── PlotDistMatrices.py
+│   └── plot_matrices.ipynb
+└── structure.txt
+
+4 directories, 21 files

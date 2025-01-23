@@ -1,0 +1,10 @@
+id1-id2: Identity: 145/198 (73.2%), Gaps: 18/198 (9.1%), Score=209.00000
+id1-id3: Identity: 117/200 (58.5%), Gaps: 20/200 (10.0%), Score=107.00000
+id1-id4: Identity: 116/200 (58.0%), Gaps: 20/200 (10.0%), Score=104.00000
+id1-id5: Identity: 105/200 (52.5%), Gaps: 21/200 (10.5%), Score=67.00000
+id2-id3: Identity: 119/185 (64.3%), Gaps: 6/185 (3.2%), Score=144.00000
+id2-id4: Identity: 122/185 (65.9%), Gaps: 6/185 (3.2%), Score=153.00000
+id2-id5: Identity: 112/185 (60.5%), Gaps: 7/185 (3.8%), Score=120.00000
+id3-id4: Identity: 180/183 (98.4%), Gaps: 0/183 (0.0%), Score=357.00000
+id3-id5: Identity: 159/183 (86.9%), Gaps: 1/183 (0.5%), Score=288.00000
+id4-id5: Identity: 158/183 (86.3%), Gaps: 1/183 (0.5%), Score=285.00000

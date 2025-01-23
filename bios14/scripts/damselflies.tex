@@ -1,0 +1,2506 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Damselflies},
+  pdfauthor={Chandrashekar CR},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Damselflies}
+\author{Chandrashekar CR}
+\date{01-01-2025}
+
+\begin{document}
+\maketitle
+
+\hypertarget{read-the-data}{%
+\section{Read the data}\label{read-the-data}}
+
+The data originates from a field monitoring project conducted in Sweden,
+focusing on two species of damselflies, Calopteryx splendens and
+Calopteryx virgo. These damselflies are commonly found in riverine
+aquatic habitats across Europe. Over five consecutive summers (June and
+July, 2011--2015), a team of researchers and students conducted repeated
+visits to study a single population. The dataset includes several
+morphological traits (linear measurements of the body, abdomen, thorax,
+and wings), a trait linked to sexual selection (forewing patch length
+and width, measured only in C. splendens), and two fitness-related
+variables (copulation status as a proxy for mating success, and lifespan
+as a proxy for longevity).
+
+To begin, I plan to familiarize myself with damselflies and explore
+intriguing questions about their biology and ecology. My initial step
+will be a preliminary examination of the dataset to understand its
+structure and variables. This will allow me to formulate specific
+research questions that can be addressed using the collected data.
+
+Variables included in this dataset are as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  year : sampled year (unit: year)
+\item
+  id : id that is unique to each individual
+\item
+  sp : species identity. CS stands for C. splendens, CV stands for C.
+  virgo
+\item
+  sex : sex of the specimens. Male for male and Female for female.
+\item
+  tbl : total body length, which is the distance from the front tip of
+  the head to the
+\item
+  rear tip of the abdomen (unit: mm)
+\item
+  abl : abdomen length (unit: mm)
+\item
+  thorl : thorax length (unit: mm)
+\item
+  thorw : thorax width (unit: mm)
+\item
+  fwl : forewing length (unit: mm)
+\item
+  hwl : hindwing length (unit: mm)
+\item
+  fpl : forewing patch length (unit: mm). Only in male C. splendens
+\item
+  fpw : forewing patch width (unit: mm). Only in male C. splendens
+\item
+  cop : copulation status. 0 means that the individual was always found
+  without a partner, 1 means that the individual was found while mating
+  with a partner at least once
+\item
+  marked : date the individual was marked
+\item
+  lifespan : days from date marked to date last seen (unit: days)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Clear any pre{-}stored variables in the environment}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+
+\CommentTok{\# Import Libraries}
+\FunctionTok{library}\NormalTok{(MASS)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.1     v tibble    3.2.1
+## v lubridate 1.9.3     v tidyr     1.3.1
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## x dplyr::select() masks MASS::select()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(patchwork)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'patchwork'
+## 
+## The following object is masked from 'package:MASS':
+## 
+##     area
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(MuMIn)}
+
+\CommentTok{\# Load the data}
+\NormalTok{male\_CS }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/male\_CS.csv"}\NormalTok{)}
+\NormalTok{male\_CV }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/male\_CV.csv"}\NormalTok{)}
+\NormalTok{female\_CS }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/female\_CS.csv"}\NormalTok{)}
+\NormalTok{female\_CV }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/female\_CV.csv"}\NormalTok{)}
+
+\NormalTok{data }\OtherTok{=} \FunctionTok{bind\_rows}\NormalTok{(male\_CS, male\_CV, female\_CS, female\_CV)}
+
+\FunctionTok{head}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   year sp        id  sex   marked lifespan cop   tbl   abl thorl thorw   fwl
+## 1 2011 CS  6_7_csm2 Male 2011-6-7        0   1 46.59 36.89  4.01  4.20 31.20
+## 2 2011 CS      cdbf Male 2011-6-7        0   0 45.76 35.10  3.42  4.01 30.66
+## 3 2011 CS 7_1_csm28 Male 2011-7-1        9   0 46.75 36.57  3.94  3.92 28.94
+## 4 2011 CS 6_7_csm13 Male 2011-6-7        5   1 46.13 35.84  3.56  4.20 30.58
+## 5 2011 CS       cpp Male 2011-6-7        9   0 47.61 37.61  3.99  4.24 31.05
+## 6 2011 CS       cpw Male 2011-6-7        1   0 45.79 35.39  3.81  3.84 29.32
+##     hwl   fpl  fpw
+## 1 29.76 16.88 9.76
+## 2 29.42 16.85 9.61
+## 3 27.63 14.59 9.38
+## 4 29.11 16.21 9.81
+## 5 30.24 16.52 9.79
+## 6 28.00 15.40 9.10
+\end{verbatim}
+
+Following a thorough literature survey, I identified several relevant
+papers examining variations in wing pigmentation, wing traits, and other
+morphological traits. I intend to conduct a comparative analysis to
+determine if both morphological and sexual traits contribute to
+copulation status. This research builds upon the findings of Golab and
+Brodin's study ``Looks or personality: what drives damselfly male mating
+success in the wild?'' (2023), which will serve as a theoretical
+framework to compare whether my results align with their findings.
+
+The research question will be addressed through a sequential analysis of
+four sub-questions:
+
+\begin{itemize}
+\tightlist
+\item
+  What is the relationship between copulation status and individual
+  sexual traits (forewing patch length and width)? This will be analyzed
+  using analysis of variance (ANOVA).
+\item
+  Which predictor better explains copulation status: forewing patch
+  length alone, width alone, or both measures combined? This
+  relationship will be examined using logistic regression models.
+\item
+  How do morphological traits collectively influence copulation status?
+  A comprehensive logistic regression analysis will be conducted using
+  all available morphological traits as predictors.
+\item
+  Which better predicts copulation status: morphological traits, sexual
+  traits, or a combination of both? A comparative analysis of logistic
+  regression models will be used to evaluate the relative importance of
+  these trait categories.
+\end{itemize}
+
+This systematic approach will allow us to understand both the individual
+and combined effects of morphological and sexual traits on mating
+success.
+
+\hypertarget{statistical-analysis-plan-for-copulation-status-study}{%
+\section{Statistical Analysis Plan for Copulation Status
+Study}\label{statistical-analysis-plan-for-copulation-status-study}}
+
+\hypertarget{analysis-1-sexual-traits-and-copulation-status}{%
+\subsection{Analysis 1: Sexual Traits and Copulation
+Status}\label{analysis-1-sexual-traits-and-copulation-status}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Variables}: Forewing patch length (FPL) and forewing patch
+  width (FPW)
+\item
+  \textbf{Prerequisites}:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Verify normality within copulation status groups using:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Shapiro-Wilk tests
+    \end{itemize}
+  \end{enumerate}
+\item
+  \textbf{Define the ANOVA model}:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    model = lm(x\textasciitilde groups)
+  \end{enumerate}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Clear the environment}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+
+\CommentTok{\# Read and prepare the data}
+\NormalTok{male\_CS }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/male\_CS.csv"}\NormalTok{)}
+\NormalTok{male\_CS }\OtherTok{=}\NormalTok{ male\_CS }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(fpl, fpw, cop) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cop =} \FunctionTok{as.factor}\NormalTok{(cop))}
+
+\CommentTok{\# Verify normality within copulation status groups}
+
+\CommentTok{\# 1. {-}{-}{-}{-}{-}{-}{-}{-}{-}{-} Forewing Patch Width (FPW) {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\CommentTok{\# Histogram}
+\NormalTok{fpw\_histogram }\OtherTok{=}\NormalTok{ male\_CS }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ fpw, }\AttributeTok{fill =}\NormalTok{ cop)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{bins =} \DecValTok{15}\NormalTok{, }\AttributeTok{position =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{cop) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribution of FPW by Copulation Status"}\NormalTok{, }
+    \AttributeTok{x =} \StringTok{"Forewing Patch Width (mm)"}\NormalTok{, }
+    \AttributeTok{y =} \StringTok{"Frequency"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{),}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)}
+\NormalTok{  )}
+
+\CommentTok{\# Save histogram}
+\FunctionTok{ggsave}\NormalTok{(}
+  \StringTok{"../results/fpw\_histogram.png"}\NormalTok{,}
+\NormalTok{  fpw\_histogram,}
+  \AttributeTok{width =} \DecValTok{200}\NormalTok{,}
+  \AttributeTok{height =} \DecValTok{100}\NormalTok{,}
+  \AttributeTok{units =} \StringTok{"mm"}\NormalTok{,}
+  \AttributeTok{dpi =} \DecValTok{600}
+\NormalTok{)}
+
+\CommentTok{\# Q{-}Q Plot}
+\NormalTok{fpw\_qq }\OtherTok{=}\NormalTok{ male\_CS }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ fpw, }\AttributeTok{color =}\NormalTok{ cop)) }\SpecialCharTok{+}
+  \FunctionTok{stat\_qq}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{stat\_qq\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{cop) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Q{-}Q Plot for FPW by Copulation Status"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Theoretical Quantiles"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Sample Quantiles"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{),}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{),}
+    \AttributeTok{legend.position =} \StringTok{"none"}
+\NormalTok{  )}
+
+\CommentTok{\# Save Q{-}Q plot}
+\FunctionTok{ggsave}\NormalTok{(}
+  \StringTok{"../results/fpw\_qq.png"}\NormalTok{,}
+\NormalTok{  fpw\_qq,}
+  \AttributeTok{width =} \DecValTok{200}\NormalTok{,}
+  \AttributeTok{height =} \DecValTok{100}\NormalTok{,}
+  \AttributeTok{units =} \StringTok{"mm"}\NormalTok{,}
+  \AttributeTok{dpi =} \DecValTok{600}
+\NormalTok{)}
+
+\CommentTok{\# 2. {-}{-}{-}{-}{-}{-}{-}{-}{-}{-} Forewing Patch Length (FPL) {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+
+\CommentTok{\# Histogram}
+\NormalTok{fpl\_histogram }\OtherTok{=}\NormalTok{ male\_CS }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ fpl, }\AttributeTok{fill =}\NormalTok{ cop)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{bins =} \DecValTok{15}\NormalTok{, }\AttributeTok{position =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{cop) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Distribution of FPL by Copulation Status"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Forewing Patch Length (mm)"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Frequency"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{),}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)}
+\NormalTok{  )}
+
+\CommentTok{\# Save histogram}
+\FunctionTok{ggsave}\NormalTok{(}
+  \StringTok{"../results/fpl\_histogram.png"}\NormalTok{,}
+\NormalTok{  fpl\_histogram,}
+  \AttributeTok{width =} \DecValTok{200}\NormalTok{,}
+  \AttributeTok{height =} \DecValTok{100}\NormalTok{,}
+  \AttributeTok{units =} \StringTok{"mm"}\NormalTok{,}
+  \AttributeTok{dpi =} \DecValTok{600}
+\NormalTok{)}
+
+\CommentTok{\# Q{-}Q Plot}
+\NormalTok{fpl\_qq }\OtherTok{=}\NormalTok{ male\_CS }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ fpl, }\AttributeTok{color =}\NormalTok{ cop)) }\SpecialCharTok{+}
+  \FunctionTok{stat\_qq}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{stat\_qq\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{cop) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Q{-}Q Plot for FPL by Copulation Status"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Theoretical Quantiles"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Sample Quantiles"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{),}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{),}
+    \AttributeTok{legend.position =} \StringTok{"none"}
+\NormalTok{  )}
+
+\CommentTok{\# Save Q{-}Q plot}
+\FunctionTok{ggsave}\NormalTok{(}
+  \StringTok{"../results/fpl\_qq.png"}\NormalTok{,}
+\NormalTok{  fpl\_qq,}
+  \AttributeTok{width =} \DecValTok{200}\NormalTok{,}
+  \AttributeTok{height =} \DecValTok{100}\NormalTok{,}
+  \AttributeTok{units =} \StringTok{"mm"}\NormalTok{,}
+  \AttributeTok{dpi =} \DecValTok{600}
+\NormalTok{)}
+
+\CommentTok{\# Perform ANOVA for FPL}
+\NormalTok{anova\_fpl }\OtherTok{=} \FunctionTok{lm}\NormalTok{(fpl }\SpecialCharTok{\textasciitilde{}} \FunctionTok{as.factor}\NormalTok{(cop), }\AttributeTok{data =}\NormalTok{ male\_CS)}
+\NormalTok{anova\_result\_fpl }\OtherTok{=} \FunctionTok{anova}\NormalTok{(anova\_fpl)}
+\NormalTok{summary\_fpl }\OtherTok{=} \FunctionTok{summary}\NormalTok{(anova\_fpl)}
+
+\CommentTok{\# Perform ANOVA for FPW}
+\NormalTok{anova\_fpw }\OtherTok{=} \FunctionTok{lm}\NormalTok{(fpw }\SpecialCharTok{\textasciitilde{}} \FunctionTok{as.factor}\NormalTok{(cop), }\AttributeTok{data =}\NormalTok{ male\_CS)}
+\NormalTok{anova\_result\_fpw }\OtherTok{=} \FunctionTok{anova}\NormalTok{(anova\_fpw)}
+\NormalTok{summary\_fpw }\OtherTok{=} \FunctionTok{summary}\NormalTok{(anova\_fpw)}
+
+\CommentTok{\# Plot the results}
+\NormalTok{fpw\_histogram}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{damselflies_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fpw\_qq}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{damselflies_files/figure-latex/unnamed-chunk-2-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fpl\_histogram}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{damselflies_files/figure-latex/unnamed-chunk-2-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fpl\_qq}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{damselflies_files/figure-latex/unnamed-chunk-2-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Print ANOVA results}
+\FunctionTok{print}\NormalTok{(anova\_result\_fpl)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: fpl
+##                  Df Sum Sq Mean Sq F value Pr(>F)
+## as.factor(cop)    1    0.9 0.92391  0.3164 0.5739
+## Residuals      2033 5937.2 2.92043
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(summary\_fpl)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = fpl ~ as.factor(cop), data = male_CS)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.2753 -1.1852 -0.1261  1.0831 12.5919 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)     16.65805    0.04110 405.320   <2e-16 ***
+## as.factor(cop)1  0.05961    0.10599   0.562    0.574    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.709 on 2033 degrees of freedom
+## Multiple R-squared:  0.0001556,  Adjusted R-squared:  -0.0003362 
+## F-statistic: 0.3164 on 1 and 2033 DF,  p-value: 0.5739
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(anova\_result\_fpw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Analysis of Variance Table
+## 
+## Response: fpw
+##                  Df Sum Sq Mean Sq F value   Pr(>F)    
+## as.factor(cop)    1   3.76  3.7551  22.688 2.04e-06 ***
+## Residuals      2033 336.49  0.1655                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(summary\_fpw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = fpw ~ as.factor(cop), data = male_CS)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -3.07243 -0.22927  0.02134  0.26610  2.52240 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)      9.584960   0.009784 979.649  < 2e-16 ***
+## as.factor(cop)1 -0.120181   0.025231  -4.763 2.04e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.4068 on 2033 degrees of freedom
+## Multiple R-squared:  0.01104,    Adjusted R-squared:  0.01055 
+## F-statistic: 22.69 on 1 and 2033 DF,  p-value: 2.04e-06
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Clear environment}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+
+
+\CommentTok{\# Read and prepare data}
+\NormalTok{male\_CS }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/male\_CS.csv"}\NormalTok{)}
+\NormalTok{male\_CS }\OtherTok{=}\NormalTok{ male\_CS }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(fpl, fpw, cop) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cop =} \FunctionTok{as.factor}\NormalTok{(cop))}
+
+\CommentTok{\# Boxplot for FPL}
+\NormalTok{box\_fpl }\OtherTok{=} \FunctionTok{ggplot}\NormalTok{(male\_CS, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{as.factor}\NormalTok{(cop), }\AttributeTok{y =}\NormalTok{ fpl)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Copulation Status"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Forewing Patch Length (fpl (mm))"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{),  }\CommentTok{\# Adjusted size of x{-}axis tick labels}
+    \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{),  }\CommentTok{\# Adjusted size of y{-}axis tick labels}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),   }\CommentTok{\# Adjusted axis titles}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)  }\CommentTok{\# Adjusted plot title}
+\NormalTok{  )}
+
+\CommentTok{\# Boxplot for FPW}
+\NormalTok{box\_fpw }\OtherTok{=} \FunctionTok{ggplot}\NormalTok{(male\_CS, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{as.factor}\NormalTok{(cop), }\AttributeTok{y =}\NormalTok{ fpw)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"Copulation Status"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Forewing Patch Width (fpw (mm))"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{),  }\CommentTok{\# Adjusted size of x{-}axis tick labels}
+    \AttributeTok{axis.text.y =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{),  }\CommentTok{\# Adjusted size of y{-}axis tick labels}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),   }\CommentTok{\# Adjusted axis titles}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{)  }\CommentTok{\# Adjusted plot title}
+\NormalTok{  )}
+
+\CommentTok{\# Combine plots side by side using patchwork}
+\NormalTok{combined\_plots }\OtherTok{=}\NormalTok{ box\_fpl }\SpecialCharTok{+}\NormalTok{ box\_fpw }\SpecialCharTok{+} \FunctionTok{plot\_layout}\NormalTok{(}\AttributeTok{ncol =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{plot\_annotation}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Comparison of Forewing Patch Length and Width by Copulation Status"}\NormalTok{, }
+    \AttributeTok{theme =} \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{17}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{))  }\CommentTok{\# Adjusted annotation title}
+\NormalTok{  )}
+
+\CommentTok{\# Display combined plots}
+\NormalTok{combined\_plots}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{damselflies_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Save the plot as a high{-}resolution PNG for LaTeX document}
+\FunctionTok{ggsave}\NormalTok{(}
+  \StringTok{"../results/anova\_combined\_plot.png"}\NormalTok{, }
+\NormalTok{  combined\_plots, }
+  \AttributeTok{width =} \DecValTok{200}\NormalTok{,  }\CommentTok{\# Width in mm}
+  \CommentTok{\#height = 80,  \# Adjusted height to maintain aspect ratio}
+  \AttributeTok{units =} \StringTok{"mm"}\NormalTok{, }
+  \AttributeTok{dpi =} \DecValTok{600}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Saving 200 x 114 mm image
+\end{verbatim}
+
+\hypertarget{results-of-sexual-traits-and-copulation-status}{%
+\subsection{Results of Sexual Traits and Copulation
+Status}\label{results-of-sexual-traits-and-copulation-status}}
+
+\textbf{Response Variables and Predictor Variables:}
+
+\begin{itemize}
+\item
+  Response Variables:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    FPL (Forewing Patch Length): Continuous variable (unit: mm)
+  \item
+    FPW (Forewing Patch Width): Continuous varibale (unit: mm)
+  \end{itemize}
+\item
+  Predictor Variable:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Copulation Status (cop): Categorical variables with two levels:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      0: Individual was always found without a partner.
+    \item
+      1: Individual was found mating with partner at least once.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{copulation-status-fpl}{%
+\paragraph{Copulation Status \textasciitilde{}
+FPL}\label{copulation-status-fpl}}
+
+\textbf{Variance Explained by the Model}
+
+From the ANOVA table:
+
+\begin{itemize}
+\item
+  Sum of Squares (SS):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Copulation Status: 0.924.
+  \item
+    Residual: 5937.2.
+  \end{itemize}
+\end{itemize}
+
+Total SS = 0.924+5937.2=5938.124.
+
+\(R^2 = \frac{\text{SS(Copulation Status)}}{\text{Total SS}} = \frac{0.924}{5938.124} \approx 0.00016\).
+This is consistent with the \(R^2 = 0.0001556\) from the model summary.
+
+Parameter Estimate and Percentage Difference:
+
+\begin{itemize}
+\item
+  Estimate for Copulation Status (1): 0.05961
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Reference group mean (\(mean_{cop=0}\)): 16.658 mm.
+  \item
+    Percentage Difference =
+    \(\frac{0.05961}{16.658} \times 100 \approx 0.36 \%\).
+  \end{itemize}
+\item
+  Group Means and Standard Errors:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(mean_{cop=0} = 16.658 \pm 0.041mm\)
+  \item
+    \(mean_{cop=1} = 16.718 \pm 0.041mm\)
+  \end{itemize}
+\end{itemize}
+
+\textbf{Percentage Difference Based on Group Means}
+
+\(\text{Percentage Difference} = \frac{mean_{cop=1}-mean_{cop=0}}{mean_{cop=0}}\times100 = \frac{16.718-16.658}{16.658}\times100 \approx 0.36 \%\)
+
+\textbf{F-Statistic and P-values}
+
+F-statistic: 0.316 p-value: 0.5739
+
+This indicates no significant difference in FPL across copulation
+statuses.
+
+\hypertarget{copulation-status-fpw}{%
+\paragraph{Copulation Status \textasciitilde{}
+FPW}\label{copulation-status-fpw}}
+
+\textbf{Variance Explained by the Model}
+
+From the ANOVA table:
+
+\begin{itemize}
+\item
+  Sum of Squares (SS):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Copulation Status: 3.76.
+  \item
+    Residual: 336.49
+  \end{itemize}
+\end{itemize}
+
+Total SS = 3.76+336.49=340.25.
+
+\(R^2 = \frac{\text{SS(Copulation Status)}}{\text{Total SS}} = \frac{3.76}{340.25} \approx 0.01104\).
+This is consistent with the \(R^2 = 0.01104\) from the model summary.
+
+Parameter Estimate and Percentage Difference:
+
+\begin{itemize}
+\item
+  Estimate for Copulation Status (1): -0.12018.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Reference group mean (\(mean_{cop=0}\)): 9.585 mm.
+  \item
+    Percentage Difference =
+    \(\frac{-0.12018}{9.585} \times 100 \approx -1.25 \%\).
+  \end{itemize}
+\item
+  Group Means and Standard Errors:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(mean_{cop=0} = 9.585 \pm 0.010mm\)
+  \item
+    \(mean_{cop=1} = 9.465 \pm 0.010mm\)
+  \end{itemize}
+\end{itemize}
+
+\textbf{Percentage Difference Based on Group Means}
+
+\(\text{Percentage Difference} = \frac{mean_{cop=1}-mean_{cop=0}}{mean_{cop=0}}\times100 = \frac{9.465-9.585}{9.585}\times100 \approx -1.25 \%\)
+
+\textbf{F-Statistic and P-values}
+
+F-statistic: 22.69 p-value: \(2.04 \times 10^{-6}\)
+
+This indicates a significant difference in FPW across copulation
+statuses.
+
+\textbf{Summary and Interpretation}:
+
+\begin{itemize}
+\tightlist
+\item
+  For FPL, the variance explained by the model (\(R^2 = 0.00016\)) is
+  negligible, with no significant difference between groups
+  (\(p=0.5739\)).
+\item
+  For FPW, the model explains 1.1\% of the variance (\(R^2 = 0.01104\)),
+  and the difference between groups is statistically significant
+  (\(p = 2.04 \times 10^{-6}\)).
+\item
+  Individuals found mating (cop=1) have slightly smaller FPW, with a
+  1.25\% reduction compared to individuals always found without a
+  partner (cop=0).
+\end{itemize}
+
+\hypertarget{analysis-2-sexual-trait-assessments}{%
+\subsection{Analysis 2: Sexual Trait
+Assessments}\label{analysis-2-sexual-trait-assessments}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Model Suite}:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Single-predictor model: Copulation status \textasciitilde{} FPL
+  \item
+    Single-predictor model: Copulation status \textasciitilde{} FPW
+  \item
+    Combined model: Copulation status \textasciitilde{} FPL + FPW
+  \item
+    Interaction model: Copulation status \textasciitilde{} FPL + FPW +
+    (FPL × FPW)
+  \end{enumerate}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Clear the environment}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+
+\CommentTok{\# Read the data and filter accordingly}
+\NormalTok{male\_CS }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/male\_CS.csv"}\NormalTok{)}
+
+\CommentTok{\# Selects only the columns fpl, fpw, and cop from the dataset.}
+\CommentTok{\# Converts the \textasciigrave{}cop\textasciigrave{} variable (copulation status) into a categorical variable (factor).}
+\NormalTok{male\_CS }\OtherTok{=}\NormalTok{ male\_CS }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(fpl, fpw, cop) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cop =} \FunctionTok{as.factor}\NormalTok{(cop))}
+
+
+\CommentTok{\# Logistic regression model: Copulation status as a function of forewing patch length (fpl)}
+\NormalTok{logit\_model\_fpl }\OtherTok{=} \FunctionTok{glm}\NormalTok{(cop }\SpecialCharTok{\textasciitilde{}}\NormalTok{ fpl, }\AttributeTok{data =}\NormalTok{ male\_CS, }\AttributeTok{family =} \FunctionTok{binomial}\NormalTok{(}\AttributeTok{link =} \StringTok{"logit"}\NormalTok{))}
+\CommentTok{\#summary(logit\_model\_fpl)}
+
+
+\CommentTok{\# Logistic regression model: Copulation status as a function of forewing patch width (fpw)}
+\NormalTok{logit\_model\_fpw }\OtherTok{=} \FunctionTok{glm}\NormalTok{(cop }\SpecialCharTok{\textasciitilde{}}\NormalTok{ fpw, }\AttributeTok{data =}\NormalTok{ male\_CS, }\AttributeTok{family =} \FunctionTok{binomial}\NormalTok{(}\AttributeTok{link =} \StringTok{"logit"}\NormalTok{))}
+\CommentTok{\#summary(logit\_model\_fpw)}
+
+\CommentTok{\# Logistic regression model: Copulation status as a function of both fpl and fpw}
+\NormalTok{logit\_model\_fpl\_fpw }\OtherTok{=} \FunctionTok{glm}\NormalTok{(cop }\SpecialCharTok{\textasciitilde{}}\NormalTok{ fpw }\SpecialCharTok{+}\NormalTok{ fpl, }\AttributeTok{data =}\NormalTok{ male\_CS, }\AttributeTok{family =} \FunctionTok{binomial}\NormalTok{(}\AttributeTok{link =} \StringTok{"logit"}\NormalTok{))}
+\FunctionTok{summary}\NormalTok{(logit\_model\_fpl\_fpw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = cop ~ fpw + fpl, family = binomial(link = "logit"), 
+##     data = male_CS)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)  4.54030    1.38748   3.272  0.00107 ** 
+## fpw         -0.83821    0.16028  -5.230  1.7e-07 ***
+## fpl          0.10284    0.03938   2.612  0.00901 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1723.0  on 2034  degrees of freedom
+## Residual deviance: 1694.8  on 2032  degrees of freedom
+## AIC: 1700.8
+## 
+## Number of Fisher Scoring iterations: 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Logistic regression model: Copulation status with interaction between fpw and fpl}
+\NormalTok{logit\_model\_interaction }\OtherTok{=} \FunctionTok{glm}\NormalTok{(cop }\SpecialCharTok{\textasciitilde{}}\NormalTok{ fpw }\SpecialCharTok{+}\NormalTok{ fpl }\SpecialCharTok{+}\NormalTok{ (fpw }\SpecialCharTok{*}\NormalTok{ fpl), }\AttributeTok{data =}\NormalTok{ male\_CS, }\AttributeTok{family =} \FunctionTok{binomial}\NormalTok{(}\AttributeTok{link =} \StringTok{"logit"}\NormalTok{))}
+\CommentTok{\#summary(logit\_model\_interaction) \# Only the interaction term (fpw*fpl) also gave the AIC score as this model.}
+
+
+\CommentTok{\# Pseudo R{-}squared (using MuMIn)}
+\FunctionTok{r.squaredGLMM}\NormalTok{(logit\_model\_fpl\_fpw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: the null model is only correct if all the variables it uses are identical 
+## to those used in fitting the original model.
+\end{verbatim}
+
+\begin{verbatim}
+##                    R2m        R2c
+## theoretical 0.02901281 0.02901281
+## delta       0.01240287 0.01240287
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Tjur\textquotesingle{}s D}
+\NormalTok{y\_hat }\OtherTok{=} \FunctionTok{predict}\NormalTok{(logit\_model\_fpl\_fpw, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{) }\CommentTok{\# Get predicted probabilities}
+
+\NormalTok{tjur\_d }\OtherTok{=} \FunctionTok{mean}\NormalTok{(y\_hat[male\_CS}\SpecialCharTok{$}\NormalTok{cop }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(y\_hat[male\_CS}\SpecialCharTok{$}\NormalTok{cop }\SpecialCharTok{==} \DecValTok{0}\NormalTok{])}
+\NormalTok{tjur\_d}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.01435361
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate mean and standard deviation of predictors}
+\NormalTok{fpw\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fpw, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{fpw\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fpw, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{fpl\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fpl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{fpl\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fpl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Predicted probabilities for fpw and fpl (mean wrt SD)}
+\NormalTok{fpw\_low }\OtherTok{=}\NormalTok{ fpw\_mean }\SpecialCharTok{{-}}\NormalTok{ fpw\_sd}
+\NormalTok{fpw\_high }\OtherTok{=}\NormalTok{ fpw\_mean }\SpecialCharTok{+}\NormalTok{ fpw\_sd}
+\NormalTok{fpl\_low }\OtherTok{=}\NormalTok{ fpl\_mean }\SpecialCharTok{{-}}\NormalTok{ fpl\_sd}
+\NormalTok{fpl\_high }\OtherTok{=}\NormalTok{ fpl\_mean }\SpecialCharTok{+}\NormalTok{ fpl\_sd}
+
+\CommentTok{\# Logistic function for probabilities}
+\NormalTok{logit\_to\_prob }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(log\_odds) \{}
+  \FunctionTok{return}\NormalTok{(}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{log\_odds)))}
+\NormalTok{\}}
+
+\CommentTok{\# Base line probabilities for fpw and fpl}
+\NormalTok{prob\_fpw\_fpl\_base }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\FloatTok{4.54030} \SpecialCharTok{+}\NormalTok{ (}\SpecialCharTok{{-}}\FloatTok{0.83821} \SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{0.10284} \SpecialCharTok{*}\NormalTok{ fpl\_mean))}
+
+\CommentTok{\# Predicted probabilities for fpw changes}
+\NormalTok{prob\_fpw\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\FloatTok{4.54030} \SpecialCharTok{+}\NormalTok{ (}\SpecialCharTok{{-}}\FloatTok{0.83821} \SpecialCharTok{*}\NormalTok{ fpw\_low) }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{0.10284} \SpecialCharTok{*}\NormalTok{ fpl\_mean))}
+\NormalTok{prob\_fpw\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\FloatTok{4.54030} \SpecialCharTok{+}\NormalTok{ (}\SpecialCharTok{{-}}\FloatTok{0.83821} \SpecialCharTok{*}\NormalTok{ fpw\_high) }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{0.10284} \SpecialCharTok{*}\NormalTok{ fpl\_mean))}
+
+\CommentTok{\# Predicted probabilities for fpl changes}
+\NormalTok{prob\_fpl\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\FloatTok{4.54030} \SpecialCharTok{+}\NormalTok{ (}\SpecialCharTok{{-}}\FloatTok{0.83821} \SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{0.10284} \SpecialCharTok{*}\NormalTok{ fpl\_low))}
+\NormalTok{prob\_fpl\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\FloatTok{4.54030} \SpecialCharTok{+}\NormalTok{ (}\SpecialCharTok{{-}}\FloatTok{0.83821} \SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+}\NormalTok{ (}\FloatTok{0.10284} \SpecialCharTok{*}\NormalTok{ fpl\_high))}
+
+\CommentTok{\# Threshold for P(cop=1)=0.5 for fpw and fpl}
+\NormalTok{fpw\_threshold }\OtherTok{=} \SpecialCharTok{{-}}\NormalTok{(}\FloatTok{4.54030} \SpecialCharTok{+}\NormalTok{ (}\FloatTok{0.10284}\SpecialCharTok{*}\NormalTok{fpl\_mean))}\SpecialCharTok{/{-}}\FloatTok{0.83821}
+\NormalTok{fpl\_threshold }\OtherTok{=}\NormalTok{ (}\SpecialCharTok{{-}}\FloatTok{4.54030} \SpecialCharTok{+}\NormalTok{ (}\SpecialCharTok{{-}}\FloatTok{0.83821}\SpecialCharTok{*}\NormalTok{fpw\_mean))}\SpecialCharTok{/} \FloatTok{0.1028}
+
+\CommentTok{\# Results}
+\FunctionTok{list}\NormalTok{(}
+  \AttributeTok{fpw\_fpl\_base =} \FunctionTok{c}\NormalTok{(prob\_fpw\_fpl\_base),}
+  \AttributeTok{fpw\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_fpw\_low, }\AttributeTok{high =}\NormalTok{ prob\_fpw\_high),}
+  \AttributeTok{fpl\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_fpl\_low, }\AttributeTok{high =}\NormalTok{ prob\_fpl\_high),}
+  \AttributeTok{thresholds =} \FunctionTok{c}\NormalTok{(}\AttributeTok{fpw =}\NormalTok{ fpw\_threshold, }\AttributeTok{fpl =}\NormalTok{ fpl\_threshold)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $fpw_fpl_base
+## [1] 0.1461995
+## 
+## $fpw_prob_change
+##       low      high 
+## 0.1943639 0.1083650 
+## 
+## $fpl_prob_change
+##       low      high 
+## 0.1255993 0.1695233 
+## 
+## $thresholds
+##         fpw         fpl 
+##    7.461538 -122.172778
+\end{verbatim}
+
+\hypertarget{results-of-analysis-2}{%
+\subsection{Results of Analysis 2}\label{results-of-analysis-2}}
+
+The logistic regression equation we will use is as follows -:
+
+\[
+\text{logit}(P) = \ln\left(\frac{P}{1-P}\right) = \text{log odds} = \beta_0 + \beta_1 \cdot \text{fpw} + \beta_2 \cdot \text{fpl}
+\]
+
+Where:
+
+- P is the probability of the outcome of interest (copulation success in
+this case),
+
+- (1-P) is the probability of failure (no copulation),
+
+- \((\frac{P}{1-P})\) represents the odds of success.
+
+We will then convert the log-odds into probabilities using the logistic
+function as follows -:
+
+\[
+P(cop=1) = \frac{1}{1+e^{-(\beta_0+\beta_1*fpw+\beta_2*fpl)}}
+\]
+
+\textbf{Estimation and Analysis:}
+
+The coefficients are:
+
+\begin{itemize}
+\tightlist
+\item
+  Intercept (\(\beta_0\)): \(4.54030\pm1.387484\)(unitless, log-odds)
+\item
+  Forewing Patch Width (\(\beta_1\)): \(-0.83821\pm0.16028\) (mm,
+  log-odds per mm increase)
+\item
+  Forewing Patch Length (\(\beta_2\)): \(0.10284\pm0.039380\) (mm,
+  log-odds per mm increase)
+\end{itemize}
+
+\textbf{Standard Deviation Effect:}
+
+\begin{itemize}
+\tightlist
+\item
+  The baseline probability of copulation when FPW and FPL are at their
+  mean values is 14.6\% chance of observing copulation when both FPW and
+  FPL are at their average size.
+\item
+  When FPW is one SD below its mean (and FPL is at its mean), the
+  probability of copulation increases to 19.4\%.
+\item
+  When FPW is one SD above its mean (and FPL is at its mean), the
+  probability of copulation decreases at 10.8\%.
+\item
+  This shows a negative relationship between FPW and the probability of
+  copulation. Smaller FPW is associated with a higher probability of
+  observed copulation.
+\item
+  When FPL is one SD below its mean (and FPW is at its mean), the
+  probability of copulation decreases to 12.6\%.
+\item
+  When FPL is one SD above its mean (and FPW is at its mean), the
+  probability of copulation increases to 17.0\%.
+\item
+  This shows a positive relationship between FPL and the probability of
+  copulation. Larger FPL is associated with a higher probability of
+  observed copulation.
+\end{itemize}
+
+\textbf{Threshold value for probability of 0.5:}
+
+\begin{itemize}
+\tightlist
+\item
+  These threshold represent the values of FPW and FPL at which the
+  predicted probability of copulation is 0.5 (50\%).
+\item
+  If FPL is zero, an FPW of approximately of 5.4167 mm would result in a
+  50\% probability of observed copulation. Because this value is well
+  below the mean value for fpw, it makes sense that the probability of
+  copulation is higher when fpw is one SD below the mean.
+\item
+  The threshold of -44.1492 for FPL is biologically meaningless. It is
+  negative and far outside the realistic range of FPL values. This
+  indicates that, within the observed range of FPL and given the model,
+  FPL alone will never drive the probability of copulation to 0.5, when
+  fpw is held at its mean.
+\end{itemize}
+
+\textbf{Pseudo} \(R^2\) (R2m = 0.029, R2c = 0.029):
+
+Since you do not have random effects in the model, the marginal R² (R2m)
+and conditional R² (R2c) are the same. A value of 0.029 means that your
+model (FPW and FPL) explains only about 2.9\% of the variance in
+copulation status. This is a very low value, indicating that other
+factors not included in your model are likely much more influential in
+determining whether an individual is observed copulating.
+
+\textbf{Tjur's D (0.014):}
+
+Tjur's D is 0.014. This indicates that the average predicted probability
+of copulation for individuals observed copulating is only 1.4\% higher
+than the average predicted probability for individuals not observed
+copulating. This is a very small difference, suggesting that the model
+has weak discriminatory power between the two groups (copulating vs.~not
+copulating).
+
+\textbf{Overall Biological Interpretation:}
+
+Our analysis reveals distinct relationships between forewing patch
+dimensions and copulation success, highlighting the complex interplay of
+sexual traits in mating dynamics:
+
+\begin{itemize}
+\tightlist
+\item
+  Width (FPW): Negatively correlated with copulation probability,
+  possibly due to female preferences, trade-offs with other fitness
+  traits, or links to unmeasured characteristics.
+\item
+  Length (FPL): Positively correlated with copulation probability,
+  potentially reflecting male quality or mechanical advantages during
+  mating.
+\end{itemize}
+
+\hypertarget{analysis-3-morphological-trait-assessment}{%
+\subsection{Analysis 3: Morphological Trait
+Assessment}\label{analysis-3-morphological-trait-assessment}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Preliminary Steps}:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Address multicollinearity:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Calculate Variance Inflation Factors (VIF)
+    \item
+      Remove redundant predictors
+    \end{itemize}
+  \item
+    Standardize continuous variables
+  \end{enumerate}
+\item
+  \textbf{Model Development}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Implement stepwise selection (forward/backward)
+  \item
+    Explore key trait interactions
+  \end{itemize}
+\item
+  \textbf{Model Validation}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Calculate McFadden's pseudo R²
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Clear the environment}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+
+\CommentTok{\# Import libraries}
+\FunctionTok{library}\NormalTok{(car)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: carData
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'car'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     recode
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     some
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Read the data and filter accordingly}
+\NormalTok{male\_CS }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/male\_CS.csv"}\NormalTok{)}
+\NormalTok{male\_CS }\OtherTok{=}\NormalTok{ male\_CS }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(tbl, abl, thorl,thorw,fwl,hwl,cop) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cop =} \FunctionTok{as.factor}\NormalTok{(cop))}
+
+\CommentTok{\# Calculate VIF: VIF \textgreater{} 5 or 10: Indicates multicollinearity; consider removing the variable.}
+\CommentTok{\# Fit an initial logistic regression model}
+\NormalTok{initial\_model }\OtherTok{=} \FunctionTok{glm}\NormalTok{(cop }\SpecialCharTok{\textasciitilde{}}\NormalTok{ tbl }\SpecialCharTok{+}\NormalTok{ abl }\SpecialCharTok{+}\NormalTok{ thorl }\SpecialCharTok{+}\NormalTok{ thorw }\SpecialCharTok{+}\NormalTok{ fwl, }\AttributeTok{data =}\NormalTok{ male\_CS, }\AttributeTok{family =}\NormalTok{ binomial) }\CommentTok{\# Removed hwl (hind wing length) as that had the largest value.}
+                     
+
+\CommentTok{\# Calculate VIF}
+\FunctionTok{vif}\NormalTok{(initial\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      tbl      abl    thorl    thorw      fwl 
+## 4.721721 4.705523 1.779078 2.281647 1.295355
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Stepwise selection}
+\NormalTok{final\_model }\OtherTok{=} \FunctionTok{step}\NormalTok{(}\FunctionTok{glm}\NormalTok{(cop }\SpecialCharTok{\textasciitilde{}}\NormalTok{ tbl }\SpecialCharTok{+}\NormalTok{ abl }\SpecialCharTok{+}\NormalTok{ thorl }\SpecialCharTok{+}\NormalTok{ thorw }\SpecialCharTok{+}\NormalTok{ fwl, }
+                        \AttributeTok{data =}\NormalTok{ male\_CS, }\AttributeTok{family =}\NormalTok{ binomial),}
+                    \AttributeTok{direction =} \StringTok{"both"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Start:  AIC=1556.6
+## cop ~ tbl + abl + thorl + thorw + fwl
+## 
+##         Df Deviance    AIC
+## - abl    1   1544.6 1554.6
+## <none>       1544.6 1556.6
+## - tbl    1   1548.1 1558.1
+## - thorw  1   1562.5 1572.5
+## - fwl    1   1571.2 1581.2
+## - thorl  1   1572.5 1582.5
+## 
+## Step:  AIC=1554.61
+## cop ~ tbl + thorl + thorw + fwl
+## 
+##         Df Deviance    AIC
+## <none>       1544.6 1554.6
+## + abl    1   1544.6 1556.6
+## - tbl    1   1557.6 1565.6
+## - thorw  1   1567.2 1575.2
+## - fwl    1   1571.7 1579.7
+## - thorl  1   1573.8 1581.8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#summary(final\_model) The interaction model has a better AIC score. So we will analyze only that.}
+
+\CommentTok{\# Step 3: Add interaction terms}
+\NormalTok{interaction\_model }\OtherTok{=} \FunctionTok{glm}\NormalTok{(cop }\SpecialCharTok{\textasciitilde{}}\NormalTok{ (thorl }\SpecialCharTok{*}\NormalTok{ thorw) }\SpecialCharTok{+}\NormalTok{ fwl }\SpecialCharTok{+}\NormalTok{ tbl, }
+                         \AttributeTok{data =}\NormalTok{ male\_CS, }\AttributeTok{family =}\NormalTok{ binomial)}
+\FunctionTok{summary}\NormalTok{(interaction\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = cop ~ (thorl * thorw) + fwl + tbl, family = binomial, 
+##     data = male_CS)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -9.51364    2.59719  -3.663 0.000249 ***
+## thorl        1.44451    0.33464   4.317 1.58e-05 ***
+## thorw        3.29692    0.55896   5.898 3.67e-09 ***
+## fwl          0.22905    0.05440   4.210 2.55e-05 ***
+## tbl         -0.16208    0.04642  -3.491 0.000481 ***
+## thorl:thorw -0.61031    0.12063  -5.059 4.21e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1723.0  on 2034  degrees of freedom
+## Residual deviance: 1519.2  on 2029  degrees of freedom
+## AIC: 1531.2
+## 
+## Number of Fisher Scoring iterations: 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Confusion Matrix}
+\NormalTok{male\_CS }\OtherTok{=}\NormalTok{ male\_CS }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{predicted\_prob =} \FunctionTok{predict}\NormalTok{(interaction\_model, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{),}
+         \AttributeTok{predicted\_class =} \FunctionTok{ifelse}\NormalTok{(predicted\_prob }\SpecialCharTok{\textgreater{}} \FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+
+
+\CommentTok{\# Pseudo R{-}squared (using MuMIn)}
+\FunctionTok{r.squaredGLMM}\NormalTok{(interaction\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: the null model is only correct if all the variables it uses are identical 
+## to those used in fitting the original model.
+\end{verbatim}
+
+\begin{verbatim}
+##                   R2m       R2c
+## theoretical 0.1747056 0.1747056
+## delta       0.0817046 0.0817046
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Tjur\textquotesingle{}s D}
+\NormalTok{y\_hat }\OtherTok{=} \FunctionTok{predict}\NormalTok{(interaction\_model, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{) }\CommentTok{\# Get predicted probabilities}
+
+\NormalTok{tjur\_d }\OtherTok{=} \FunctionTok{mean}\NormalTok{(y\_hat[male\_CS}\SpecialCharTok{$}\NormalTok{cop }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(y\_hat[male\_CS}\SpecialCharTok{$}\NormalTok{cop }\SpecialCharTok{==} \DecValTok{0}\NormalTok{])}
+\NormalTok{tjur\_d}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1186639
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Clear the environment}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+
+
+\CommentTok{\# Read the data and filter}
+\NormalTok{male\_CS }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/male\_CS.csv"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(tbl, abl, thorl, thorw, fwl, hwl, cop) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cop =} \FunctionTok{as.factor}\NormalTok{(cop))}
+
+\CommentTok{\# Interaction model}
+\NormalTok{interaction\_model }\OtherTok{=} \FunctionTok{glm}\NormalTok{(cop }\SpecialCharTok{\textasciitilde{}}\NormalTok{ (thorl }\SpecialCharTok{*}\NormalTok{ thorw) }\SpecialCharTok{+}\NormalTok{ fwl }\SpecialCharTok{+}\NormalTok{ tbl, }
+                         \AttributeTok{data =}\NormalTok{ male\_CS, }\AttributeTok{family =}\NormalTok{ binomial)}
+
+\CommentTok{\# Mean and standard deviation of predictors}
+\NormalTok{thorl\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{thorl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{thorl\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{thorl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{thorw\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{thorw, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{thorw\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{thorw, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{fwl\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fwl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{fwl\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fwl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{tbl\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{tbl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{tbl\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{tbl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Define logistic function}
+\NormalTok{logit\_to\_prob }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(log\_odds) \{}
+  \FunctionTok{return}\NormalTok{(}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{log\_odds)))}
+\NormalTok{\}}
+
+\CommentTok{\# Base probability}
+\NormalTok{prob\_base }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364} \SpecialCharTok{+} 
+\NormalTok{                            (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                            (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                            (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                            (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                            (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\CommentTok{\# Predicted probabilities for thorl wrt SD}
+\NormalTok{prob\_thorl\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364} \SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ (thorl\_mean }\SpecialCharTok{{-}}\NormalTok{ thorl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ (thorl\_mean }\SpecialCharTok{{-}}\NormalTok{ thorl\_sd) }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\NormalTok{prob\_thorl\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364} \SpecialCharTok{+} 
+\NormalTok{                                 (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ (thorl\_mean }\SpecialCharTok{+}\NormalTok{ thorl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                 (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ (thorl\_mean }\SpecialCharTok{+}\NormalTok{ thorl\_sd) }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\CommentTok{\# Predicted probabilities for thorw wrt SD}
+\NormalTok{prob\_thorw\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364} \SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ (thorw\_mean }\SpecialCharTok{{-}}\NormalTok{ thorw\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ (thorw\_mean }\SpecialCharTok{{-}}\NormalTok{ thorw\_sd)))}
+
+\NormalTok{prob\_thorw\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364} \SpecialCharTok{+} 
+\NormalTok{                                 (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ (thorw\_mean }\SpecialCharTok{+}\NormalTok{ thorw\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                 (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ (thorw\_mean }\SpecialCharTok{+}\NormalTok{ thorw\_sd)))}
+
+\CommentTok{\# Predicted probabilities for fwl wrt SD}
+\NormalTok{prob\_fwl\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364} \SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ (fwl\_mean }\SpecialCharTok{{-}}\NormalTok{ fwl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\NormalTok{prob\_fwl\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364} \SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ (fwl\_mean }\SpecialCharTok{+}\NormalTok{ fwl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\CommentTok{\# Predicted probabilities for tbl wrt SD}
+\NormalTok{prob\_tbl\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364} \SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ (tbl\_mean }\SpecialCharTok{{-}}\NormalTok{ tbl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\NormalTok{prob\_tbl\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364} \SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ (tbl\_mean }\SpecialCharTok{+}\NormalTok{ tbl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+
+\CommentTok{\# Thresholds for P(cop=1)=0.5}
+\NormalTok{thorl\_threshold }\OtherTok{=}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364} \SpecialCharTok{+}\NormalTok{ (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                     (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                     (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ tbl\_mean)) }\SpecialCharTok{/} 
+\NormalTok{                   (}\FloatTok{1.44451} \SpecialCharTok{+}\NormalTok{ (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ thorw\_mean)))}
+
+\NormalTok{thorw\_threshold }\OtherTok{=}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364} \SpecialCharTok{+}\NormalTok{ (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                     (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                     (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ tbl\_mean)) }\SpecialCharTok{/} 
+\NormalTok{                   (}\FloatTok{3.29692} \SpecialCharTok{+}\NormalTok{ (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ thorl\_mean)))}
+
+\CommentTok{\# Threshold for forewing length (fwl)}
+\NormalTok{fwl\_threshold }\OtherTok{=}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364}\NormalTok{) }\SpecialCharTok{+} 
+\NormalTok{                    (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                    (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                    (}\SpecialCharTok{{-}}\FloatTok{0.16208} \SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                    (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean)) }\SpecialCharTok{/} 
+                  \FloatTok{0.22905}\NormalTok{)}
+
+\CommentTok{\# Threshold for tibia length (tbl)}
+\NormalTok{tbl\_threshold }\OtherTok{=}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{9.51364}\NormalTok{) }\SpecialCharTok{+} 
+\NormalTok{                    (}\FloatTok{1.44451} \SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                    (}\FloatTok{3.29692} \SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                    (}\FloatTok{0.22905} \SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                    (}\SpecialCharTok{{-}}\FloatTok{0.61031} \SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean)) }\SpecialCharTok{/} 
+                  \SpecialCharTok{{-}}\FloatTok{0.16208}\NormalTok{)}
+
+\CommentTok{\# Results}
+\FunctionTok{list}\NormalTok{(}
+  \AttributeTok{base\_probability =}\NormalTok{ prob\_base,}
+  \AttributeTok{thorl\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_thorl\_low, }\AttributeTok{high =}\NormalTok{ prob\_thorl\_high),}
+  \AttributeTok{thorw\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_thorw\_low, }\AttributeTok{high =}\NormalTok{ prob\_thorw\_high),}
+  \AttributeTok{fwl\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_fwl\_low, }\AttributeTok{high =}\NormalTok{ prob\_fwl\_high),}
+  \AttributeTok{tbl\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_tbl\_low, }\AttributeTok{high =}\NormalTok{ prob\_tbl\_high),}
+  \AttributeTok{thresholds =} \FunctionTok{c}\NormalTok{(}\AttributeTok{thorl =}\NormalTok{ thorl\_threshold, }\AttributeTok{thorw =}\NormalTok{ thorw\_threshold, }\AttributeTok{fwl =}\NormalTok{ fwl\_threshold, }\AttributeTok{tbl =}\NormalTok{ tbl\_threshold)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $base_probability
+## [1] 0.09619425
+## 
+## $thorl_prob_change
+##        low       high 
+## 0.11729036 0.07855486 
+## 
+## $thorw_prob_change
+##        low       high 
+## 0.12025371 0.07652969 
+## 
+## $fwl_prob_change
+##        low       high 
+## 0.06897913 0.13261739 
+## 
+## $tbl_prob_change
+##        low       high 
+## 0.11819914 0.07792396 
+## 
+## $thresholds
+##      thorl      thorw        fwl        tbl 
+## -10.464853  -3.616353 -44.047298 147.670527
+\end{verbatim}
+
+\hypertarget{results-of-analysis-3}{%
+\subsection{Results of Analysis 3}\label{results-of-analysis-3}}
+
+The Logistic Regression Equation can be written as -:
+
+\[
+\text{logit}(P) = \ln\left(\frac{P}{1-P}\right) = \text{log-odds} = \beta_0 + \beta_1 \cdot \text{thorl} + \beta_2 \cdot \text{thorw} + \beta_3 \cdot \text{fwl} + \beta_4 \cdot \text{tbl} + \beta_5 \cdot (\text{thorl} \cdot \text{thorw}) \\
+\text{Where:} \\
+P \text{ is the probability of the outcome of interest (copulation success).} \\
+1-P \text{ is the probability of failure (no copulation).} \\
+\frac{P}{1-P} \text{ is the odds of success.} \\
+\]
+
+The probability can be calculated as follows -:
+
+\[
+P(cop=1) = \frac{1}{1 + e^{-(\beta_0 + \beta_1*thorl + \beta_2*thorw + \beta_3*fwl + \beta_4*tbl + \beta_5{thorl*throw})}}
+\]
+
+\textbf{Estimation and Analysis:}
+
+\begin{itemize}
+\tightlist
+\item
+  Intercept (\(\beta_0\)): \(-9.51364 \pm 2.59719\) (unitless, log-odds)
+\item
+  Thorax Length (\(\beta_1\)): \(1.44451 \pm 0.33464\) (mm, log-odds per
+  mm increase)
+\item
+  Thorax Width (\(\beta_2\)): \(3.29692 \pm 0.55896\) (mm, log-odds per
+  mm increase)
+\item
+  Forewing Length (\(\beta_3\)): \(0.22905 \pm 0.05440\) (mm, log-odds
+  per mm increase)
+\item
+  Tarsus Length (\(\beta_4\)): \(-0.16208 \pm 0.04642\) (mm, log-odds
+  per mm increase)
+\item
+  Interaction (Thorax Length x Thorax Width, \(\beta_5\)):
+  \(-0.61031 \pm 0.12063\) (unitless, log-odds)
+\end{itemize}
+
+\textbf{Standard Deviation Effect:}
+
+\begin{itemize}
+\tightlist
+\item
+  The baseline probability of copulation when thorl, thorw, fwl, and tbl
+  are at their mean values is 9.6\%.
+\item
+  When thorax length (thorl) is one SD below its mean (and other
+  variables are at their means), the probability of copulation increases
+  to 11.7\%.
+\item
+  When thorl is one SD above its mean, the probability of copulation
+  decreases to 7.9\%. This suggests a complex relationship between thorl
+  and copulation probability, likely influenced by the interaction with
+  thorw.
+\item
+  When thorax width (thorw) is one SD below its mean (and other
+  variables are at their means), the probability of copulation increases
+  to 12.0\%.
+\item
+  When thorw is one SD above its mean, the probability of copulation
+  decreases to 7.7\%.
+\item
+  This also suggests a complex relationship between thorw and copulation
+  probability, again likely due to the interaction with thorl.
+\item
+  When forewing length (fwl) is one SD below its mean (and other
+  variables are at their means), the probability of copulation decreases
+  to 6.9\%.
+\item
+  When fwl is one SD above its mean, the probability of copulation
+  increases to 13.3\%.
+\item
+  This indicates a positive relationship between fwl and copulation
+  probability. Larger fwl is associated with a higher probability of
+  observed copulation.
+\item
+  When total length (tbl) is one SD below its mean (and other variables
+  are at their means), the probability of copulation increases to
+  11.8\%.
+\item
+  When tbl is one SD above its mean, the probability of copulation
+  decreases to 7.8\%. This shows a negative relationship between tbl and
+  copulation probability. Larger tbl is associated with a lower
+  probability of observed copulation.
+\end{itemize}
+
+\textbf{Threshold value for probability of 0.5:}
+
+-thorl (-10.46): This threshold is -10.46 mm. This is biologically
+meaningless because thorax length cannot be negative. This indicates
+that, given the model and the observed range of the other variables, no
+biologically plausible value of thorax length alone, while holding other
+variables at their means, will ever result in a 50\% probability of
+copulation.
+
+\begin{itemize}
+\item
+  thorw (-3.62): This threshold is -3.62 mm. Like the thorl threshold,
+  this is also biologically meaningless as thorax width cannot be
+  negative. This indicates that no biologically plausible value of
+  thorax width alone, while holding other variables at their means, will
+  result in a 50\% probability of copulation.
+\item
+  fwl (-44.05): This threshold is -44.05 mm. Again, this is biologically
+  meaningless as forewing length cannot be negative. This means that
+  within the range of observed values and while holding other variables
+  constant at their means, no value of fwl will result in a 50\%
+  probability of copulation.
+\item
+  tbl (147.67): This threshold is 147.67 mm. This value is likely also
+  biologically unrealistic, being far larger than any observed tibia
+  lengths in your data. It indicates that even if the other variables
+  are held at their means, it would require an extremely large tibia
+  length to reach a 50\% probability of copulation according to this
+  model.
+\end{itemize}
+
+\textbf{Pseudo R2 (R2m = 0.175, R2c = 0.175):}
+
+Since there are no random effects, the marginal and conditional R² are
+the same. A value of 0.175 means that the model explains approximately
+17.5\% of the variance in copulation status. This is a higher value than
+in the previous model, suggesting that including the interaction between
+thorax length and width, aswell as fwl and tbl, improves the model's
+explanatory power. However, it still means that a substantial portion of
+the variation in copulation status is explained by factors not included
+in the model.
+
+\textbf{Tjur's D (0.119):}
+
+Tjur's D is 0.119. This indicates that the average predicted probability
+of copulation for individuals observed copulating is 11.9\% higher than
+the average predicted probability for individuals not observed
+copulating. This is a higher value than in the previous model,
+suggesting that this model has better discriminatory power between the
+two groups.
+
+\hypertarget{analysis-4-trait-category-comparison}{%
+\subsection{Analysis 4: Trait Category
+Comparison}\label{analysis-4-trait-category-comparison}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Model Categories}:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    Morphological: Copulation status \textasciitilde{} (thorl * thorw) +
+    fwl + tbl
+  \item
+    Sexual: Copulation status \textasciitilde{} fpw + fpl
+  \item
+    Comprehensive: Copulation status \textasciitilde{} fpw + fpl +
+    (thorl * thorw) + fwl + tbl
+  \end{enumerate}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Clear environment}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+
+\CommentTok{\# Read the data and filter accordingly}
+\NormalTok{male\_CS }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/male\_CS.csv"}\NormalTok{)}
+\NormalTok{male\_CS }\OtherTok{=}\NormalTok{ male\_CS }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cop =} \FunctionTok{as.factor}\NormalTok{(cop))}
+
+\CommentTok{\# Logistic regression model}
+\CommentTok{\# Note to self {-} I have tried all these model to get an AIC score below 1519.9 and it is just not possible {-}:}
+\CommentTok{\# \# Model 1: Simple Main Effects Model (Body Size and Wing Length)}
+\CommentTok{\#model1 = glm(cop \textasciitilde{} tbl + thorl + thorw + fwl + hwl, data = male\_CS, family = binomial)}
+\CommentTok{\# Model 2: Adding Interaction Terms Between Size and Shape}
+\CommentTok{\#model2 = glm(cop \textasciitilde{} tbl * thorl + thorl * thorw + fwl * hwl + tbl * fwl, data = male\_CS, family = binomial)}
+\CommentTok{\# Model 3: Including Lifespan}
+\CommentTok{\#model3 = glm(cop \textasciitilde{} tbl + thorl + thorw + fwl + lifespan, data = male\_CS, family = binomial)}
+\CommentTok{\# Model 4: Combining Forewing Patch Length and Width}
+\CommentTok{\#model4 = glm(cop \textasciitilde{} tbl + fpl * fpw + thorl + thorw + fwl, data = male\_CS, family = binomial)}
+\CommentTok{\# Model 5: Full Model with All Interactions}
+\CommentTok{\#model5 = glm(cop \textasciitilde{} tbl * abl * thorl * thorw * fwl * hwl * fpl * fpw * lifespan, data = male\_CS, family = binomial)}
+\CommentTok{\# Model 6: Size and Shape Focused Model}
+\CommentTok{\#model6 = glm(cop \textasciitilde{} thorl * thorw + fpl * fpw + tbl + lifespan, data = male\_CS, family = binomial)}
+\CommentTok{\# Model 7: Testing the Effects of Individual Wing Dimensions}
+\CommentTok{\#model7 = glm(cop \textasciitilde{} fwl * fpl + fwl * fpw + hwl + tbl + thorl, data = male\_CS, family = binomial)}
+\CommentTok{\# Model 8: Alternative Model with Only Morphological Variables}
+\CommentTok{\#model8 = glm(cop \textasciitilde{} tbl + thorl * thorw + fwl * hwl + fpl + fpw, data = male\_CS, family = binomial)}
+
+\NormalTok{comprehensive\_model }\OtherTok{=} \FunctionTok{glm}\NormalTok{(cop }\SpecialCharTok{\textasciitilde{}}\NormalTok{ fpw }\SpecialCharTok{+}\NormalTok{ fpl }\SpecialCharTok{+}\NormalTok{ (thorl }\SpecialCharTok{*}\NormalTok{ thorw) }\SpecialCharTok{+}\NormalTok{ fwl }\SpecialCharTok{+}\NormalTok{ tbl, }
+                           \AttributeTok{data =}\NormalTok{ male\_CS, }\AttributeTok{family =}\NormalTok{ binomial)}
+
+\CommentTok{\# Summary of the model}
+\FunctionTok{summary}\NormalTok{(comprehensive\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = cop ~ fpw + fpl + (thorl * thorw) + fwl + tbl, 
+##     family = binomial, data = male_CS)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -9.92113    2.76539  -3.588 0.000334 ***
+## fpw         -0.37658    0.19694  -1.912 0.055855 .  
+## fpl          0.16911    0.04585   3.689 0.000225 ***
+## thorl        1.52774    0.34341   4.449 8.64e-06 ***
+## thorw        3.40994    0.58007   5.878 4.14e-09 ***
+## fwl          0.25363    0.05464   4.642 3.45e-06 ***
+## tbl         -0.16423    0.05569  -2.949 0.003188 ** 
+## thorl:thorw -0.62605    0.12300  -5.090 3.59e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1723.0  on 2034  degrees of freedom
+## Residual deviance: 1503.9  on 2027  degrees of freedom
+## AIC: 1519.9
+## 
+## Number of Fisher Scoring iterations: 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Pseudo R{-}squared (using MuMIn)}
+\FunctionTok{r.squaredGLMM}\NormalTok{(comprehensive\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: the null model is only correct if all the variables it uses are identical 
+## to those used in fitting the original model.
+\end{verbatim}
+
+\begin{verbatim}
+##                    R2m        R2c
+## theoretical 0.18502500 0.18502500
+## delta       0.08711048 0.08711048
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Tjur\textquotesingle{}s D}
+\NormalTok{y\_hat }\OtherTok{=} \FunctionTok{predict}\NormalTok{(comprehensive\_model, }\AttributeTok{type =} \StringTok{"response"}\NormalTok{) }\CommentTok{\# Get predicted probabilities}
+
+\NormalTok{tjur\_d }\OtherTok{=} \FunctionTok{mean}\NormalTok{(y\_hat[male\_CS}\SpecialCharTok{$}\NormalTok{cop }\SpecialCharTok{==} \DecValTok{1}\NormalTok{]) }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(y\_hat[male\_CS}\SpecialCharTok{$}\NormalTok{cop }\SpecialCharTok{==} \DecValTok{0}\NormalTok{])}
+\NormalTok{tjur\_d}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.1279942
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Note to self:}
+\CommentTok{\# I tried scaling the predictor variables and applying standard scaler, and nothing change AIC was the same and the thresholds also were the same but were scaled differently. So I don\textquotesingle{}t think I need to perform any scaling for this.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Clear environment}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
+
+
+\CommentTok{\# Read the data and filter}
+\NormalTok{male\_CS }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/male\_CS.csv"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cop =} \FunctionTok{as.factor}\NormalTok{(cop))}
+
+\CommentTok{\# Comprehensive Interaction Model}
+\NormalTok{comprehensive\_model }\OtherTok{=} \FunctionTok{glm}\NormalTok{(cop }\SpecialCharTok{\textasciitilde{}}\NormalTok{ fpw }\SpecialCharTok{+}\NormalTok{ fpl }\SpecialCharTok{+}\NormalTok{ (thorl }\SpecialCharTok{*}\NormalTok{ thorw) }\SpecialCharTok{+}\NormalTok{ fwl }\SpecialCharTok{+}\NormalTok{ tbl, }
+                           \AttributeTok{data =}\NormalTok{ male\_CS, }\AttributeTok{family =}\NormalTok{ binomial)}
+
+\CommentTok{\# Extract coefficients}
+\NormalTok{intercept }\OtherTok{=} \SpecialCharTok{{-}}\FloatTok{9.9211330}
+\NormalTok{coef\_fpw }\OtherTok{=} \SpecialCharTok{{-}}\FloatTok{0.3765803}
+\NormalTok{coef\_fpl }\OtherTok{=} \FloatTok{0.1691122}
+\NormalTok{coef\_thorl }\OtherTok{=} \FloatTok{1.5277422}
+\NormalTok{coef\_thorw }\OtherTok{=} \FloatTok{3.4099390}
+\NormalTok{coef\_fwl }\OtherTok{=} \FloatTok{0.2536333}
+\NormalTok{coef\_tbl }\OtherTok{=} \SpecialCharTok{{-}}\FloatTok{0.1642272}
+\NormalTok{coef\_thorl\_thorw }\OtherTok{=} \SpecialCharTok{{-}}\FloatTok{0.6260531}
+
+\CommentTok{\# Mean and standard deviation of predictors}
+\NormalTok{fpw\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fpw, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{fpl\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fpl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{thorl\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{thorl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{thorw\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{thorw, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{fwl\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fwl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{tbl\_mean }\OtherTok{=} \FunctionTok{mean}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{tbl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{fpw\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fpw, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{fpl\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fpl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{thorl\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{thorl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{thorw\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{thorw, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{fwl\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{fwl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{tbl\_sd }\OtherTok{=} \FunctionTok{sd}\NormalTok{(male\_CS}\SpecialCharTok{$}\NormalTok{tbl, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Define logistic function}
+\NormalTok{logit\_to\_prob }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(log\_odds) \{}
+  \FunctionTok{return}\NormalTok{(}\DecValTok{1} \SpecialCharTok{/}\NormalTok{ (}\DecValTok{1} \SpecialCharTok{+} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{log\_odds)))}
+\NormalTok{\}}
+
+\CommentTok{\# Base probability}
+\NormalTok{prob\_base }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                            (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                            (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                            (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                            (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                            (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                            (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                            (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\CommentTok{\# Predicted probabilities for fpw wrt SD}
+\NormalTok{prob\_fpw\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fpw }\SpecialCharTok{*}\NormalTok{ (fpw\_mean }\SpecialCharTok{{-}}\NormalTok{ fpw\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\NormalTok{prob\_fpw\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpw }\SpecialCharTok{*}\NormalTok{ (fpw\_mean }\SpecialCharTok{+}\NormalTok{ fpw\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\CommentTok{\# Predicted probabilities for fpl wrt SD}
+\NormalTok{prob\_fpl\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fpl }\SpecialCharTok{*}\NormalTok{ (fpl\_mean }\SpecialCharTok{{-}}\NormalTok{ fpl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\NormalTok{prob\_fpl\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpl }\SpecialCharTok{*}\NormalTok{ (fpl\_mean }\SpecialCharTok{+}\NormalTok{ fpl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\CommentTok{\# Predicted probabilities for thorl wrt SD}
+\NormalTok{prob\_thorl\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl }\SpecialCharTok{*}\NormalTok{ (thorl\_mean }\SpecialCharTok{{-}}\NormalTok{ thorl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ (thorl\_mean }\SpecialCharTok{{-}}\NormalTok{ thorl\_sd) }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\NormalTok{prob\_thorl\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_thorl }\SpecialCharTok{*}\NormalTok{ (thorl\_mean }\SpecialCharTok{+}\NormalTok{ thorl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ (thorl\_mean }\SpecialCharTok{+}\NormalTok{ thorl\_sd) }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\CommentTok{\# Predicted probabilities for thorw wrt SD}
+\NormalTok{prob\_thorw\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorw }\SpecialCharTok{*}\NormalTok{ (thorw\_mean }\SpecialCharTok{{-}}\NormalTok{ thorw\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ (thorw\_mean }\SpecialCharTok{{-}}\NormalTok{ thorw\_sd)))}
+
+\NormalTok{prob\_thorw\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_thorw }\SpecialCharTok{*}\NormalTok{ (thorw\_mean }\SpecialCharTok{+}\NormalTok{ thorw\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                 (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ (thorw\_mean }\SpecialCharTok{+}\NormalTok{ thorw\_sd)))}
+
+\CommentTok{\# Predicted probabilities for fwl wrt SD}
+\NormalTok{prob\_fwl\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fwl }\SpecialCharTok{*}\NormalTok{ (fwl\_mean }\SpecialCharTok{{-}}\NormalTok{ fwl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\NormalTok{prob\_fwl\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fwl }\SpecialCharTok{*}\NormalTok{ (fwl\_mean }\SpecialCharTok{+}\NormalTok{ fwl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\CommentTok{\# Predicted probabilities for tbl wrt SD}
+\NormalTok{prob\_tbl\_low }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_tbl }\SpecialCharTok{*}\NormalTok{ (tbl\_mean }\SpecialCharTok{{-}}\NormalTok{ tbl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                               (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+\NormalTok{prob\_tbl\_high }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(intercept }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_tbl }\SpecialCharTok{*}\NormalTok{ (tbl\_mean }\SpecialCharTok{+}\NormalTok{ tbl\_sd)) }\SpecialCharTok{+} 
+\NormalTok{                                (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean))}
+
+
+\CommentTok{\# Threshold for fpw}
+\NormalTok{fpw\_threshold }\OtherTok{=}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{(}
+\NormalTok{  intercept }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean)}
+\NormalTok{) }\SpecialCharTok{/}\NormalTok{ coef\_fpw)}
+
+\CommentTok{\# Threshold for fpl}
+\NormalTok{fpl\_threshold }\OtherTok{=}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{(}
+\NormalTok{  intercept }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean)}
+\NormalTok{) }\SpecialCharTok{/}\NormalTok{ coef\_fpl)}
+
+\CommentTok{\# Threshold for thorl}
+\NormalTok{thorl\_threshold }\OtherTok{=}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{(}
+\NormalTok{  intercept }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean)}
+\NormalTok{) }\SpecialCharTok{/}\NormalTok{ (coef\_thorl }\SpecialCharTok{+}\NormalTok{ (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean)))}
+
+\CommentTok{\# Threshold for thorw}
+\NormalTok{thorw\_threshold }\OtherTok{=}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{(}
+\NormalTok{  intercept }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean)}
+\NormalTok{) }\SpecialCharTok{/}\NormalTok{ (coef\_thorw }\SpecialCharTok{+}\NormalTok{ (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean)))}
+
+\CommentTok{\# Threshold for fwl}
+\NormalTok{fwl\_threshold }\OtherTok{=}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{(}
+\NormalTok{  intercept }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean)}
+\NormalTok{) }\SpecialCharTok{/}\NormalTok{ coef\_fwl)}
+
+\CommentTok{\# Threshold for tbl}
+\NormalTok{tbl\_threshold }\OtherTok{=}\NormalTok{ (}\SpecialCharTok{{-}}\NormalTok{(}
+\NormalTok{  intercept }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorl }\SpecialCharTok{*}\NormalTok{ thorl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorw }\SpecialCharTok{*}\NormalTok{ thorw\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean) }\SpecialCharTok{+} 
+\NormalTok{  (coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ thorl\_mean }\SpecialCharTok{*}\NormalTok{ thorw\_mean)}
+\NormalTok{) }\SpecialCharTok{/}\NormalTok{ coef\_tbl)}
+
+
+\CommentTok{\# Results}
+\FunctionTok{list}\NormalTok{(}
+  \AttributeTok{base\_probability =}\NormalTok{ prob\_base,}
+  \AttributeTok{fpw\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_fpw\_low, }\AttributeTok{high =}\NormalTok{ prob\_fpw\_high),}
+  \AttributeTok{fpl\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_fpl\_low, }\AttributeTok{high =}\NormalTok{ prob\_fpl\_high),}
+  \AttributeTok{thorl\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_thorl\_low, }\AttributeTok{high =}\NormalTok{ prob\_thorl\_high),}
+  \AttributeTok{thorw\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_thorw\_low, }\AttributeTok{high =}\NormalTok{ prob\_thorw\_high),}
+  \AttributeTok{fwl\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_fwl\_low, }\AttributeTok{high =}\NormalTok{ prob\_fwl\_high),}
+  \AttributeTok{tbl\_prob\_change =} \FunctionTok{c}\NormalTok{(}\AttributeTok{low =}\NormalTok{ prob\_tbl\_low, }\AttributeTok{high =}\NormalTok{ prob\_tbl\_high),}
+  \AttributeTok{thresholds =} \FunctionTok{c}\NormalTok{(}\AttributeTok{thorl =}\NormalTok{ thorl\_threshold, }\AttributeTok{thorw =}\NormalTok{ thorw\_threshold, }\AttributeTok{fwl =}\NormalTok{ fwl\_threshold, }\AttributeTok{tbl =}\NormalTok{ tbl\_threshold, }\AttributeTok{fpw =}\NormalTok{ fpw\_threshold, }\AttributeTok{fpl =}\NormalTok{ fpl\_threshold)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $base_probability
+## [1] 0.09445039
+## 
+## $fpw_prob_change
+##        low       high 
+## 0.10847177 0.08207459 
+## 
+## $fpl_prob_change
+##        low       high 
+## 0.07246551 0.12222620 
+## 
+## $thorl_prob_change
+##        low       high 
+## 0.10834243 0.08217546 
+## 
+## $thorw_prob_change
+##        low       high 
+## 0.11678964 0.07601636 
+## 
+## $fwl_prob_change
+##      low     high 
+## 0.065279 0.134778 
+## 
+## $tbl_prob_change
+##        low       high 
+## 0.11642156 0.07626773 
+## 
+## $thresholds
+##      thorl      thorw        fwl        tbl        fpw        fpl 
+## -18.142232  -4.013802  38.154875  30.333731   3.564271  30.033688
+\end{verbatim}
+
+\hypertarget{results-of-analysis-4}{%
+\subsection{Results of Analysis 4}\label{results-of-analysis-4}}
+
+The Logistic Regression Equation can be written as -:
+
+\[
+\text{logit}(P) = \ln\left(\frac{P}{1-P}\right) = \text{log-odds} = \beta_0 + \beta_1 \cdot \text{fpw} + \beta_2 \cdot \text{fpl} + \beta_3 \cdot \text{thorl} + \beta_4 \cdot \text{thorw} + \beta_5 \cdot \text{fwl} + \beta_6 \cdot \text{tbl} + \beta_7 \cdot (\text{thorl} \cdot \text{thorw}) \\
+\text{Where:} \\
+P \text{ is the probability of the outcome of interest (copulation success).} \\
+1-P \text{ is the probability of failure (no copulation).} \\
+\frac{P}{1-P} \text{ is the odds of success.} 
+\]
+
+The probability can be calculated as follows -:
+
+\[
+P(cop=1) = \frac{1}{1 + e^{-(\beta_0 + \beta_1fpw + \beta_2fpl + \beta_3thorl + \beta_4thorw + \beta_5fwl + \beta_6tbl + \beta_7*(thorl*thorw))}}
+\]
+
+\textbf{Estimation and Analysis:}
+
+The coefficients are:
+
+\begin{itemize}
+\tightlist
+\item
+  Intercept (\(\beta_0\)): −9.92113±2.76539 (unitless, log-odds)
+\item
+  Forewing Patch Width (\(\beta_1\)): −0.37658±0.19694 (mm, log-odds per
+  mm increase)
+\item
+  Forewing Patch Length (\(\beta_2\)): 0.16911±0.04585 (mm, log-odds per
+  mm increase)
+\item
+  Thorax Length (\(\beta_3\)): 1.52774±0.34341 (mm, log-odds per mm
+  increase)
+\item
+  Thorax Width (\(\beta_4\)): 3.40994±0.58007 (mm, log-odds per mm
+  increase)
+\item
+  Forewing Length (\(\beta_5\)): 0.25363±0.05464 (mm, log-odds per mm
+  increase)
+\item
+  Tibia Length (\(\beta_6\)): −0.16423±0.05569 (mm, log-odds per mm
+  increase)
+\item
+  Interaction (Thorax Length x Thorax Width, \(\beta_7\)):
+  −0.62605±0.12300 (unitless, log-odds)
+\end{itemize}
+
+\textbf{Standard Deviation Effect:}
+
+\begin{itemize}
+\tightlist
+\item
+  The baseline probability of copulation when fpw, fpl, thorl, thorw,
+  and tbl are at their mean values is 9.4\%.
+\item
+  When forewing patch width (fpw) is one SD below its mean (and other
+  variables are at their means), the probability of copulation increases
+  to 10.8\%.
+\item
+  When fpw is one SD above its mean, the probability of copulation
+  decreases to 8.2\%. This suggests a negative relationship between fpw
+  and copulation probability. Smaller fpw is associated with a higher
+  probability of observed copulation.
+\item
+  When forewing patch length (fpl) is one SD below its mean (and other
+  variables are at their means), the probability of copulation decreases
+  to 7.2\%.
+\item
+  When fpl is one SD above its mean, the probability of copulation
+  increases to 12.2\%. This indicates a positive relationship between
+  fpl and copulation probability. Larger fpl is associated with a higher
+  probability of observed copulation.
+\item
+  When thorax length (thorl) is one SD below its mean (and other
+  variables are at their means), the probability of copulation increases
+  to 10.8\%.
+\item
+  When thorl is one SD above its mean, the probability of copulation
+  decreases to 8.2\%. This suggests a complex relationship between thorl
+  and copulation probability, likely influenced by the interaction with
+  thorw.
+\item
+  When thorax width (thorw) is one SD below its mean (and other
+  variables are at their means), the probability of copulation increases
+  to 11.7\%.
+\item
+  When thorw is one SD above its mean, the probability of copulation
+  decreases to 7.6\%. This also suggests a complex relationship between
+  thorw and copulation probability, again likely due to the interaction
+  with thorl.
+\item
+  When forewing length (fwl) is one SD below its mean (and other
+  variables are at their means), the probability of copulation decreases
+  to 6.5\%.
+\item
+  When fwl is one SD above its mean, the probability of copulation
+  increases to 13.5\%. This indicates a positive relationship between
+  fwl and copulation probability. Larger fwl is associated with a higher
+  probability of observed copulation.
+\item
+  When total length (tbl) is one SD below its mean (and other variables
+  are at their means), the probability of copulation increases to
+  11.6\%.
+\item
+  When tbl is one SD above its mean, the probability of copulation
+  decreases to 7.6\%. This shows a negative relationship between tbl and
+  copulation probability. Larger tbl is associated with a lower
+  probability of observed copulation.
+\end{itemize}
+
+\textbf{Threshold value for probability of 0.5:}
+
+These thresholds represent the values of each predictor at which the
+predicted probability of copulation is 0.5 (50\%), when all other
+predictors are held at their mean values.
+
+\begin{itemize}
+\item
+  thorl (-18.14 mm): This threshold is -18.14 mm. Given that the
+  observed range of thorl is positive, this threshold is biologically
+  meaningless. It falls far outside the possible range of thorax length.
+  This means that, within the observed range of the other variables and
+  holding them at their means, no biologically plausible value of thorl
+  alone will result in a 50\% probability of copulation.
+\item
+  thorw (-4.01 mm): This threshold is -4.01 mm. This is also
+  biologically meaningless as thorax width cannot be negative.
+  Therefore, no realistic value of thorw alone, with other variables
+  held at their means, will lead to a 50\% copulation probability.
+\item
+  fwl (38.15 mm): This threshold is 38.15 mm. The observed range of fwl
+  is 23 to 38 mm. The calculated threshold of 38.15 mm is at the very
+  upper limit of the observed range. This suggests that with other
+  variables held at their means, an fwl value at the high end of the
+  observed range would result in approximately a 50\% probability of
+  copulation.
+\item
+  tbl (30.33 mm): This threshold is 30.33 mm. The observed range of tbl
+  is 37 to 50 mm. The calculated threshold of 30.33 mm is below the
+  observed range. This indicates that, given the model, with other
+  variables held at their mean values, no observed value of tbl alone
+  will result in a 50\% probability of copulation.
+\item
+  fpw (3.56 mm): This threshold is 3.56 mm. The observed range of fpw is
+  6.39 to 12.5 mm. The calculated threshold of 3.56 mm is well below the
+  observed range. This indicates that, with other variables at their
+  means, no observed value of fpw alone will result in a 50\%
+  probability of copulation.
+\item
+  fpl (30.03 mm): This threshold is 30.03 mm. The observed range of fpl
+  is 11 to 30 mm. The calculated threshold of 30.03 mm is at the very
+  upper limit of the observed range. This suggests that with other
+  variables held at their means, an fpl value at the high end of the
+  observed range would result in approximately a 50\% probability of
+  copulation.
+\end{itemize}
+
+Only the thresholds for fwl and fpl fall within or at the edge of the
+observed ranges of these variables. The thresholds for thorl, thorw, and
+fpw are outside the observed ranges, indicating that these variables
+alone, when other variables are held at their means, do not drive the
+probability of copulation to 50\% within the observed data. The fact
+that most thresholds are outside the observed data range reinforces the
+idea that the probability of copulation is determined by the combination
+of predictor values, particularly the interaction between thorl and
+thorw, rather than any single predictor acting alone.
+
+\textbf{Pseudo R2 (R2m = 0.185, R2c = 0.185):}
+
+Since there are no random effects, the marginal and conditional R² are
+the same. A value of 0.185 means that the model explains approximately
+18.5\% of the variance in copulation status. This is a higher value than
+in the previous model, suggesting that including fpw and fpl improves
+the model's explanatory power. However, it still means that a
+substantial portion of the variation in copulation status is explained
+by factors not included in the model.
+
+\textbf{Tjur's D (0.128):}
+
+Tjur's D is 0.128. This indicates that the average predicted probability
+of copulation for individuals observed copulating is 12.8\% higher than
+the average predicted probability for individuals not observed
+copulating. This is a higher value than in the previous model,
+suggesting that this model has better discriminatory power between the
+two groups.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Data for plotting predicted probabilities with SD and Base}
+\NormalTok{plot\_data }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Variable =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"fpw"}\NormalTok{, }\StringTok{"fpl"}\NormalTok{, }\StringTok{"thorl"}\NormalTok{, }\StringTok{"thorw"}\NormalTok{, }\StringTok{"fwl"}\NormalTok{, }\StringTok{"tbl"}\NormalTok{), }\AttributeTok{each =} \DecValTok{3}\NormalTok{),}
+  \AttributeTok{Level =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Below SD"}\NormalTok{, }\StringTok{"Base"}\NormalTok{, }\StringTok{"Above SD"}\NormalTok{), }\AttributeTok{times =} \DecValTok{6}\NormalTok{),}
+  \AttributeTok{Probability =} \FunctionTok{c}\NormalTok{(}
+\NormalTok{    prob\_fpw\_low, prob\_base, prob\_fpw\_high,}
+\NormalTok{    prob\_fpl\_low, prob\_base, prob\_fpl\_high,}
+\NormalTok{    prob\_thorl\_low, prob\_base, prob\_thorl\_high,}
+\NormalTok{    prob\_thorw\_low, prob\_base, prob\_thorw\_high,}
+\NormalTok{    prob\_fwl\_low, prob\_base, prob\_fwl\_high,}
+\NormalTok{    prob\_tbl\_low, prob\_base, prob\_tbl\_high}
+\NormalTok{  )}
+\NormalTok{)}
+
+\CommentTok{\# Adjust the order of factor levels to make "Below SD" to the left, and "Above SD" to the right of "Base"}
+\NormalTok{plot\_data}\SpecialCharTok{$}\NormalTok{Level }\OtherTok{=} \FunctionTok{factor}\NormalTok{(plot\_data}\SpecialCharTok{$}\NormalTok{Level, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Below SD"}\NormalTok{, }\StringTok{"Base"}\NormalTok{, }\StringTok{"Above SD"}\NormalTok{))}
+
+\CommentTok{\# Create the plot}
+\NormalTok{plot }\OtherTok{=} \FunctionTok{ggplot}\NormalTok{(plot\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Variable, }\AttributeTok{y =}\NormalTok{ Probability, }\AttributeTok{fill =}\NormalTok{ Level)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.8}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Predicted Probabilities for Variables"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Probability"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Variables"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}
+    \AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Below SD"} \OtherTok{=} \StringTok{"\#1f77b4"}\NormalTok{, }\StringTok{"Base"} \OtherTok{=} \StringTok{"\#f2a900"}\NormalTok{, }\StringTok{"Above SD"} \OtherTok{=} \StringTok{"\#d62728"}\NormalTok{),}
+    \AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\StringTok{"Below SD"}\NormalTok{, }\StringTok{"Base"}\NormalTok{, }\StringTok{"Above SD"}\NormalTok{),}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Below SD"}\NormalTok{, }\StringTok{"Base"}\NormalTok{, }\StringTok{"Above SD"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{,}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \DecValTok{18}\NormalTok{),}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{)}
+\NormalTok{  )}
+
+\CommentTok{\# Display the plot}
+\FunctionTok{print}\NormalTok{(plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{damselflies_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Save the plot as a high{-}resolution PNG}
+\FunctionTok{ggsave}\NormalTok{(}
+  \AttributeTok{filename =} \StringTok{"../results/predicted\_probabilities\_plot.png"}\NormalTok{, }
+  \AttributeTok{plot =}\NormalTok{ plot, }
+  \AttributeTok{width =} \DecValTok{200}\NormalTok{,  }\CommentTok{\# Width in mm}
+  \AttributeTok{height =} \DecValTok{80}\NormalTok{,  }\CommentTok{\# Adjusted height for document proportions}
+  \AttributeTok{units =} \StringTok{"mm"}\NormalTok{,}
+  \AttributeTok{dpi =} \DecValTok{600}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Generate grid of values for thorl and thorw}
+\NormalTok{thorl\_seq }\OtherTok{=} \FunctionTok{seq}\NormalTok{(thorl\_mean }\SpecialCharTok{{-}} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ thorl\_sd, thorl\_mean }\SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ thorl\_sd, }\AttributeTok{length.out =} \DecValTok{50}\NormalTok{)}
+\NormalTok{thorw\_seq }\OtherTok{=} \FunctionTok{seq}\NormalTok{(thorw\_mean }\SpecialCharTok{{-}} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ thorw\_sd, thorw\_mean }\SpecialCharTok{+} \DecValTok{2} \SpecialCharTok{*}\NormalTok{ thorw\_sd, }\AttributeTok{length.out =} \DecValTok{50}\NormalTok{)}
+
+\NormalTok{interaction\_data }\OtherTok{=} \FunctionTok{expand.grid}\NormalTok{(}\AttributeTok{thorl =}\NormalTok{ thorl\_seq, }\AttributeTok{thorw =}\NormalTok{ thorw\_seq)}
+
+\CommentTok{\# Predict probabilities}
+\NormalTok{interaction\_data}\SpecialCharTok{$}\NormalTok{Probability }\OtherTok{=} \FunctionTok{logit\_to\_prob}\NormalTok{(}
+\NormalTok{  intercept }\SpecialCharTok{+} 
+\NormalTok{    coef\_thorl }\SpecialCharTok{*}\NormalTok{ interaction\_data}\SpecialCharTok{$}\NormalTok{thorl }\SpecialCharTok{+} 
+\NormalTok{    coef\_thorw }\SpecialCharTok{*}\NormalTok{ interaction\_data}\SpecialCharTok{$}\NormalTok{thorw }\SpecialCharTok{+} 
+\NormalTok{    coef\_thorl\_thorw }\SpecialCharTok{*}\NormalTok{ interaction\_data}\SpecialCharTok{$}\NormalTok{thorl }\SpecialCharTok{*}\NormalTok{ interaction\_data}\SpecialCharTok{$}\NormalTok{thorw }\SpecialCharTok{+}
+\NormalTok{    coef\_fpw }\SpecialCharTok{*}\NormalTok{ fpw\_mean }\SpecialCharTok{+}
+\NormalTok{    coef\_fpl }\SpecialCharTok{*}\NormalTok{ fpl\_mean }\SpecialCharTok{+}
+\NormalTok{    coef\_fwl }\SpecialCharTok{*}\NormalTok{ fwl\_mean }\SpecialCharTok{+}
+\NormalTok{    coef\_tbl }\SpecialCharTok{*}\NormalTok{ tbl\_mean}
+\NormalTok{)}
+
+\CommentTok{\# Create contour plot}
+\NormalTok{contour\_plot }\OtherTok{=} \FunctionTok{ggplot}\NormalTok{(interaction\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ thorl, }\AttributeTok{y =}\NormalTok{ thorw, }\AttributeTok{z =}\NormalTok{ Probability)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_contour\_filled}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Effect of thorl and thorw Interaction on Predicted Probabilities"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"thorl (mm)"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"thorw (mm)"}\NormalTok{,}
+    \AttributeTok{fill =} \StringTok{"Probability"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.3}\NormalTok{, }\AttributeTok{size =} \DecValTok{16}\NormalTok{),  }\CommentTok{\# Centered and adjusted title size}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),               }\CommentTok{\# Axis title size}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),                }\CommentTok{\# Axis text size}
+    \AttributeTok{legend.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),             }\CommentTok{\# Legend title size}
+    \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{)               }\CommentTok{\# Legend text size}
+\NormalTok{  )}
+
+\CommentTok{\# Display the plot}
+\FunctionTok{print}\NormalTok{(contour\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{damselflies_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Save the plot as a high{-}resolution PNG}
+\FunctionTok{ggsave}\NormalTok{(}
+  \AttributeTok{filename =} \StringTok{"../results/interaction\_contour\_plot.png"}\NormalTok{, }
+  \AttributeTok{plot =}\NormalTok{ contour\_plot, }
+  \AttributeTok{width =} \DecValTok{180}\NormalTok{,  }\CommentTok{\# Width in mm}
+  \AttributeTok{height =} \DecValTok{120}\NormalTok{, }\CommentTok{\# Adjusted height for document proportions}
+  \AttributeTok{units =} \StringTok{"mm"}\NormalTok{,}
+  \AttributeTok{dpi =} \DecValTok{600}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Extract coefficients and confidence intervals}
+\NormalTok{coef\_summary }\OtherTok{=} \FunctionTok{summary}\NormalTok{(comprehensive\_model)}\SpecialCharTok{$}\NormalTok{coefficients}
+\NormalTok{coef\_data }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Term =} \FunctionTok{rownames}\NormalTok{(coef\_summary),}
+  \AttributeTok{Estimate =}\NormalTok{ coef\_summary[, }\StringTok{"Estimate"}\NormalTok{],}
+  \AttributeTok{StdError =}\NormalTok{ coef\_summary[, }\StringTok{"Std. Error"}\NormalTok{],}
+  \AttributeTok{LowerCI =}\NormalTok{ coef\_summary[, }\StringTok{"Estimate"}\NormalTok{] }\SpecialCharTok{{-}} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ coef\_summary[, }\StringTok{"Std. Error"}\NormalTok{],}
+  \AttributeTok{UpperCI =}\NormalTok{ coef\_summary[, }\StringTok{"Estimate"}\NormalTok{] }\SpecialCharTok{+} \FloatTok{1.96} \SpecialCharTok{*}\NormalTok{ coef\_summary[, }\StringTok{"Std. Error"}\NormalTok{]}
+\NormalTok{)}
+
+\CommentTok{\# Plot coefficients}
+\NormalTok{coef\_plot }\OtherTok{=} \FunctionTok{ggplot}\NormalTok{(coef\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Term, }\AttributeTok{y =}\NormalTok{ Estimate)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ LowerCI, }\AttributeTok{ymax =}\NormalTok{ UpperCI), }\AttributeTok{width =} \FloatTok{0.3}\NormalTok{, }\AttributeTok{color =} \StringTok{"\#0072B2"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Coefficient Estimates with 95\% Confidence Intervals"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Estimate"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Variables"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \DecValTok{18}\NormalTok{),  }\CommentTok{\# Centered and scaled title}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),               }\CommentTok{\# Axis title size}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),                }\CommentTok{\# Axis text size}
+    \AttributeTok{panel.grid.major =} \FunctionTok{element\_line}\NormalTok{(}\AttributeTok{linewidth =} \FloatTok{0.5}\NormalTok{),        }\CommentTok{\# Adjust grid line thickness}
+    \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{()                  }\CommentTok{\# Hide minor grid lines}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()  }\CommentTok{\# Flip coordinates for better readability}
+
+\CommentTok{\# Display the plot}
+\FunctionTok{print}\NormalTok{(coef\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{damselflies_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Save the plot as a high{-}resolution PNG}
+\FunctionTok{ggsave}\NormalTok{(}
+  \AttributeTok{filename =} \StringTok{"../results/coefficients\_plot.png"}\NormalTok{, }
+  \AttributeTok{plot =}\NormalTok{ coef\_plot, }
+  \AttributeTok{width =} \DecValTok{200}\NormalTok{,  }\CommentTok{\# Width in mm for LaTeX integration}
+  \AttributeTok{height =} \DecValTok{120}\NormalTok{, }\CommentTok{\# Adjusted height for readability}
+  \AttributeTok{units =} \StringTok{"mm"}\NormalTok{,}
+  \AttributeTok{dpi =} \DecValTok{600}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create a dataframe for thresholds}
+\NormalTok{threshold\_data }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Variable =} \FunctionTok{c}\NormalTok{(}\StringTok{"fpw"}\NormalTok{, }\StringTok{"fpl"}\NormalTok{, }\StringTok{"thorl"}\NormalTok{, }\StringTok{"thorw"}\NormalTok{, }\StringTok{"fwl"}\NormalTok{, }\StringTok{"tbl"}\NormalTok{),}
+  \AttributeTok{Threshold =} \FunctionTok{c}\NormalTok{(fpw\_threshold, fpl\_threshold, thorl\_threshold, thorw\_threshold, fwl\_threshold, tbl\_threshold)}
+\NormalTok{)}
+
+\CommentTok{\# Plot thresholds}
+\NormalTok{threshold\_plot }\OtherTok{=} \FunctionTok{ggplot}\NormalTok{(threshold\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Variable, }\AttributeTok{y =}\NormalTok{ Threshold)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"lightblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Thresholds for Variables"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Threshold Value"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Variables"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \DecValTok{18}\NormalTok{),  }\CommentTok{\# Centered and scaled title}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),               }\CommentTok{\# Axis title size}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{),                }\CommentTok{\# Axis text size}
+    \AttributeTok{panel.grid.major =} \FunctionTok{element\_blank}\NormalTok{(),        }\CommentTok{\# Adjust grid line thickness}
+    \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{()                  }\CommentTok{\# Hide minor grid lines}
+\NormalTok{  )}
+
+\CommentTok{\# Display the plot}
+\FunctionTok{print}\NormalTok{(threshold\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{damselflies_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Save the plot as a high{-}resolution PNG}
+\FunctionTok{ggsave}\NormalTok{(}
+  \AttributeTok{filename =} \StringTok{"../results/threshold\_plot.png"}\NormalTok{, }
+  \AttributeTok{plot =}\NormalTok{ threshold\_plot, }
+  \AttributeTok{width =} \DecValTok{200}\NormalTok{,  }\CommentTok{\# Width in mm for LaTeX integration}
+  \AttributeTok{height =} \DecValTok{120}\NormalTok{, }\CommentTok{\# Adjusted height for readability}
+  \AttributeTok{units =} \StringTok{"mm"}\NormalTok{,}
+  \AttributeTok{dpi =} \DecValTok{600}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Read the data and filter accordingly}
+\NormalTok{male\_CS }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"../data/male\_CS.csv"}\NormalTok{)}
+\NormalTok{scatter\_plot }\OtherTok{=}\NormalTok{ male\_CS }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cop =} \FunctionTok{as.factor}\NormalTok{(cop)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ thorw, }\AttributeTok{y =}\NormalTok{ thorl, }\AttributeTok{colour =}\NormalTok{ cop)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Adjusted point size and transparency}
+  \FunctionTok{theme\_classic}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Scatter Plot of thorl vs thorw by Copulation Status"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"thorw (mm)"}\NormalTok{,  }\CommentTok{\# Added unit for clarity}
+    \AttributeTok{y =} \StringTok{"thorl (mm)"}\NormalTok{,  }\CommentTok{\# Added unit for clarity}
+    \AttributeTok{colour =} \StringTok{"Copulation Status"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{,  }\CommentTok{\# Position legend at the top}
+    \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \DecValTok{18}\NormalTok{),  }\CommentTok{\# Centered and scaled title}
+    \AttributeTok{axis.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{16}\NormalTok{),              }\CommentTok{\# Adjusted axis title size}
+    \AttributeTok{axis.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{14}\NormalTok{)                }\CommentTok{\# Adjusted axis text size}
+\NormalTok{  )}
+
+\CommentTok{\# Display the plot}
+\FunctionTok{print}\NormalTok{(scatter\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{damselflies_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Save the plot as a high{-}resolution PNG}
+\FunctionTok{ggsave}\NormalTok{(}
+  \AttributeTok{filename =} \StringTok{"../results/thorl\_vs\_thorw\_scatter.png"}\NormalTok{, }
+  \AttributeTok{plot =}\NormalTok{ scatter\_plot, }
+  \AttributeTok{width =} \DecValTok{200}\NormalTok{,  }\CommentTok{\# Width in mm for LaTeX integration}
+  \AttributeTok{height =} \DecValTok{150}\NormalTok{, }\CommentTok{\# Adjusted height for readability}
+  \AttributeTok{units =} \StringTok{"mm"}\NormalTok{,}
+  \AttributeTok{dpi =} \DecValTok{600}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

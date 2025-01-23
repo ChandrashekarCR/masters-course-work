@@ -1,0 +1,72 @@
+.
+├── file_struct.txt
+├── README.md
+├── running_ex_1
+│   ├── data_1
+│   │   ├── malaria.blastx.tab
+│   │   ├── malaria.fna
+│   │   ├── Running Exercise 1.tgz
+│   │   └── test.fna
+│   ├── README.md
+│   ├── results_1
+│   │   └── output.txt
+│   └── scripts_1
+│       └── malaria.py
+├── running_ex_2
+│   ├── data_2
+│   │   ├── correct_parameters_float.txt
+│   │   ├── correct_parameters.txt
+│   │   ├── empty_parameters.txt
+│   │   ├── float_score.fna
+│   │   ├── float_score_wrong.txt
+│   │   ├── full_gaps_fasta.fna
+│   │   ├── half_parameters.txt
+│   │   ├── parameters.txt
+│   │   ├── Running Exercise 2-1.tgz
+│   │   ├── score.example.fna
+│   │   ├── score.extra.fna
+│   │   ├── score.fna
+│   │   └── wrong_parameters.txt
+│   ├── default_output.txt
+│   ├── output_file_name_only.txt
+│   ├── README.md
+│   ├── results_2
+│   │   ├── correct_empty_output.txt
+│   │   ├── correct_float_output.txt
+│   │   ├── correct_full_output.txt
+│   │   ├── correct_half_output.txt
+│   │   ├── correct_no_parameter_output.txt
+│   │   ├── correct_wrong_output.txt
+│   │   ├── default_output.txt
+│   │   └── wrong_float_output.txt
+│   └── scripts_2
+│       ├── driver.py
+│       └── FastaAligner.py
+└── running_ex_3
+    ├── comparison_dendrogram_mt.png
+    ├── comparison_dendrogram_y.png
+    ├── comparison_heatmap_mt.png
+    ├── comparison_heatmap_y.png
+    ├── data_3
+    │   ├── mtdna_alignment_matrix.txt
+    │   ├── mtdna_identity_matrix.txt
+    │   ├── y_alignment_matrix.txt
+    │   └── y_identity_matrix.txt
+    ├── environment.yml
+    ├── README.md
+    ├── results_3
+    │   ├── mt_alignment_dendrogram.png
+    │   ├── mt_alignment_heatmap.png
+    │   ├── mt_identity_dendrogram.png
+    │   ├── mt_identity_heatmap.png
+    │   ├── y_alignment_dendrogram.png
+    │   ├── y_alignment_heatmap.png
+    │   ├── y_identity_dendrogram.png
+    │   └── y_identity_heatmap.png
+    ├── scripts_3
+    │   ├── main.ipynb
+    │   ├── PlotDistMatrices.py
+    │   └── plot_matrices.ipynb
+    └── structure.txt
+
+13 directories, 57 files

@@ -1,0 +1,3 @@
+mat->=2
+transv--2
+mismatch -6
