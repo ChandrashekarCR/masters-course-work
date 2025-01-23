@@ -1,0 +1,960 @@
+---
+title: "Exam 2024-2025"
+author: "Chandrashekar CR"
+date: "2024-12-13"
+output: html_document
+---
+
+# 1. ANN and GA (5p)
+
+You should now be familiar with the simplest artificial neural network, the single-layer perceptron consisting of one node with two inputs and a bias.
+
+a) Explain why it cannot be solve the logical operator XOR? (2p)
+
+1a) The single-layer perceptron cannot solve the logical operator XOR due to the linear separability limitation. The XOR (exclusive OR) operator output 1 if exactly one if its two inputs is 1, and 0 otherwise. The truth table for XOR is give below:
+
+```{r echo=FALSE}
+# Create a dataframe for the XOR truth table
+xor_truth_table = data.frame(
+  Input1 = c(0,0,1,1),
+  Input2 = c(0,1,0,1),
+  XOR_Output = c(0,1,1,0)
+)
+
+knitr::kable(xor_truth_table, col.names = c("Input 1 (x1)","Input 2 (x2)","XOR Output (y)"))
+```
+
+A perceptron applies a weighted sum of the inputs plus a bias component to determine whether the output is 0 or 1.
+
+$$
+y = f(w_1x_1 + w_2x_2 + b) \\
+\text{where f is an activation function}
+$$
+
+A single layer perceptoron can classify inputs correctly only if the outputs can be separated by a straight line in the input space (2D). Logical AND and OR can be separated linearly in a 2D plane, but XOR cannot because its ouputs form a pattern that is not linearly separable.
+
+If we plot the inputs $(x_1,x_2)$ and their corresponding XOR outputs in a 2D plane:
+
+- Points for XOR:
+  - $(0,0) \rightarrow 0$
+  - $(0,1) \rightarrow 1$
+  - $(1,0) \rightarrow 1$
+  - $(1,1) \rightarrow 0$
+
+```{r}
+# Clear environment
+rm(list = ls())
+
+# Load necessary library
+library(ggplot2)
+
+# Create the XOR truth table as a data frame
+xor_data = data.frame(
+  Input1 = c(0, 0, 1, 1),
+  Input2 = c(0, 1, 0, 1),
+  Output = c(0, 1, 1, 0)
+)
+
+# Add a column for the class label
+xor_data$Class = factor(xor_data$Output, labels = c("Class 0", "Class 1"))
+
+# Plot the XOR data
+xor_plot = ggplot(xor_data, aes(x = Input1, y = Input2, color = Class)) +
+  geom_point(size = 5) +
+  geom_abline(intercept = 0.5, slope = -1, linetype = "dashed", color = "green", linewidth = 1) +
+  geom_abline(intercept = 1.5, slope = -1, linetype = "dashed", color = "red", linewidth = 1) +
+  annotate("text", x = 0, y = 0, label = "(0, 0)", vjust = -1.2, size = 4) +
+  annotate("text", x = 0, y = 1, label = "(0, 1)", vjust = -1.2, size = 4) +
+  annotate("text", x = 1, y = 0, label = "(1, 0)", vjust = -1.2, size = 4) +
+  annotate("text", x = 1, y = 1, label = "(1, 1)", vjust = -1.2, size = 4) +
+  coord_cartesian(xlim = c(0.0, 1.5), ylim = c(0.0, 1.5)) +
+  labs(
+    title = "XOR Gate: Non-Linearly Separable Problem",
+    x = "Input 1 (x1)",
+    y = "Input 2 (x2)",
+    color = "Class"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.position = "bottom"
+  )
+
+# Display the plot
+xor_plot
+
+#ggsave("xor_plot.png",path = "./exam_plots", width = 7, height =5 , dpi=700)
+```
+
+The plot shows that $(0,0)$ and $(1,1)$ belong to one class (output 0), $(0,1)$ and $(1,0)$ belong to another class (output 1). XOR requires a non-linear decision boundary such as a curved or segmented line, which a single-layer perceptron cannot produce. Therefore to solve the Logical XOR, a neural network must include atleast one hidden layer and non-linear activations functions.
+
+b) What will happen with the separation line if we remove the bias (or set it to zero)? (1p)
+
+1b) If the bias is removed or set to zero in a single-layer perceptron, the separation line will always pass through the origin (0,0). This is because the equation of the decision boundary in a perceptron is given by:
+
+$$
+w_1x_1 + w_2x_2 + b = 0 \\
+\text{Where, } w_1 \text{ and } w_2 \text{ are the weights for the inputs } x_1 \text{ and } x_2 \text{ and } b \text{ is the bias.} \\
+\text{When } b \text{ is 0 } (b=0), \\
+w_1x_1 + w_2x_2 = 0
+$$
+
+This represents a line that always passes through the origin, as the constant term is eliminated. By removing the bias, the model's ability to shift the decision boundary away from the origin is lost. For the XOR, where a flexible separation is needed, removing the bias makes it even more impossible for the perceptron to learn th correct classification, as no line through the origin can separate the XOR points correctly.
+
+c) Give four differences between a binary (0 and 1) and a continuous (decimal numbers) genetic algorithm? (2p)
+
+1c) 
+
+```{r echo=FALSE}
+
+# Create a data frame for the difference between binary and continuous genetic algorithms
+genetic_algorithms = data.frame(
+  slno = c(1,2,3,4),
+  binary = c(
+    "Solutions (individuals) are encoded as binary strings (e.g., 0 and 1).",
+    "Operates in a discrete search space.",
+    "Uses bitwise operations like flipping (mutation) and binary crossover.",
+    "Limited precision due to binary encoding (depends on string length)."
+  ),
+  continuous = c(
+    "Solutions are represented as real-valued (decimal) numbers.",
+    "Operates in a continuous search space.",
+    "Uses operations like Gaussian mutation and arithmetic crossover.",
+    "High precision as real numbers directly represent the solution."
+  )
+
+)
+
+# Generate the table using knitr::kable
+knitr::kable(genetic_algorithms, col.names = c("Sl No","Binary Genetic Algorithm", "Continuous Genetic Algorithm"))
+```
+
+# 2. The dynamics of a spatially structured population (8p)
+
+First consider a single population that follows the dynamics 
+
+$$
+\frac{dn_1}{dt} = (r_1 - kn_1^2)n_1 \\
+\text{where } n_1 \text{ is the population size, }\\ t \text{ is time, } \\r_1 \text{ is the intrinsic growth rate and } k \text{ represents the strength of density dependence.}\\
+\text{All parameters are poistive, i.e larger than zero.}
+$$ 
+
+a) What is the (non-trivial) equilibrium population size? (1p)
+
+2a) To find the (non trivial) equilibrium population size, we will equate the rate of change of population size to zero. This is from the fact that we know that at equilibrium there will be no change in the population.
+
+$$
+\frac{dn_1}{dt} = 0 \\
+(r_1 - kn_1^2)n_1 = 0\\
+\text{Trivial Solution: } n_1 = 0 \\
+\text{Non-Trivial Solution: }(r_1-kn_1^2) = 0 \\
+n_1 = n_{eq} = \pm\sqrt\frac{r_1}{k}
+$$ 
+
+Since $n_{eq}$ represents a population size and must be non-negative, we discard the negative root. Thus, the non-trivial equilibrium population size is $n_{eq} = \pm\sqrt\frac{r_1}{k}$. The equilibrium size $n_{eq}$ is determined by the intrinsic growth rate $r_1$ and the strength of density dependence $k$.
+
+b)  Show that it is a stable equilibrium. (1p)
+
+2b) To prove that it is a stable equilibrium we will take the first derivative of ordinary equation. If the derivative of the differential expression with respect to n is less than zero, then we can show that the equilibrium is stable.
+
+$$
+\frac{dn_1}{dt} = f(n_1) = (r_1 - kn_1^2)n_1 \\
+f'(n_1) = \frac{d((r_1 - kn_1^2)n_1)}{dn_1} = \frac{d(r_1n_1)}{dn_1} - \frac{d(kn_1^3)}{dn_1} \\
+f'(n_1) = r_1 - 3kn_1^2 \\
+\text{We know that } n_{eq} = \sqrt\frac{r_1}{k} \text{ . Substituting it in the above equation, we get} \\
+f'(n_{eq}) = r_1 - 3k\frac{r_1}{k} \\
+f'(n_{eq}) = -2r_1
+$$
+
+We know that $r_1$, the intrinsic growth factor is always greater than zero. Therefore, the derivative of the $f'(n_{eq})$ is always less than zero. This indicate that the equilibrium $n_{eq} = \sqrt\frac{r_1}{k}$ is stable.
+
+c) Write a script in R that plots $\frac{dn}{dt}$ as a function of n. Choose the parameter values yourself.
+
+2c) 
+```{r}
+rm(list = ls())
+library(ggplot2)
+
+# Parameter Initialization
+r = 1 # Intrinsic growth factor
+k = 0.02 # Strength of density dependence
+
+n = seq(0,300,by=0.1)
+
+# Population dynamics equation
+pop_eqn = function (n) {
+  return (r - k*n^2)*n
+}
+
+# Rate of change of population
+dndt = pop_eqn(n)
+
+# Create a data frame for plotting
+popdata = data.frame(n = n, dndt = dndt)
+
+pop_growth_dynamics = ggplot(data = popdata, aes(x = n, y = dndt)) +
+  geom_line(color = "blue", linewidth = 1.2) +
+  geom_hline(yintercept = 0, color="red",linetype = "dashed", linewidth = 1)+
+  labs(
+    title = "Population Growth Dynamics",
+    x = "Population Size (n)",
+    y = "Rate of Change (dn/dt)",
+    caption = "Model: dn/dt = (r- k *n ^2) * n\n Parameter: r = 1, k = 0.02"
+  ) +
+  theme_classic() + 
+  theme(
+    plot.title = element_text(hjust = 0.5, vjust = 0.5, face = "bold"),
+    axis.title = element_text(face = "bold"),
+    plot.caption = element_text(hjust = 0)
+  )
+
+pop_growth_dynamics
+#ggsave("population_dynamics.png",path = "./exam_plots", width = 7, height =5 , dpi=700)
+```
+
+Now assume there is a second population of the same species that has the dynamics
+
+$$
+\frac{dn_2}{dt} = (r_2 - kn_2^2)n_2
+$$
+
+Further assume that there is one-direction dispersal (one can think of drift down a stream or in prevailing wind direction) from population 1 to population 2, such that a proportion m of population 1 disperses to population 2 per unit unit. In other words, individuals disperse from population 1 to population 2 at a rate $mn_1$ per unit time unit.
+
+d) Write down the new equation for the dynamics of $n_1$ and $n_2$, given the migration described above. (1p)
+
+2d) To incorporate one-directional dispersal from population $n_1$ to population $n_2$, we modify the equations for the dynamics of $n_1$ and $n_2$ to include the migration term $mn_1$.
+
+For $n_1$: The population $n_1$ loses individuals at a rate $mn_1$. Therefore the equation becomes:
+
+$$
+\frac{dn_1}{dt} = (r_1-kn_1^2)n_1 - mn_1 \\
+\text{m > 0: Proportion of individuals dispersing from } n_1 \text{ to } n_2 \text{ per unit time.}
+$$
+
+For $n_2$: The population $n_2$ gains individuals from $n_1$ at a rate $mn_1$. The equation for $n_2$ becomes:
+
+$$
+\frac{dn_2}{dt} = (r_2 - kn_2^2)n_2 + mn_1 \\
+\text{m > 0: Proportion of individuals dispersing from } n_1 \text{ to } n_2 \text{ per unit time.}
+$$
+
+e) What is the new equilibrium of population 1? (1p)
+
+2e) To find the new equilibrium for population $n_1$ under one-directional dispersal, we need to solve the modified equation for $n_1$ when $\frac{dn_1}{dt} = 0$. The equation is as follows: 
+
+$$
+\frac{dn_1}{dt} = (r_1 - kn_1^2)n_1 -mn_1 = 0 \\
+= n_1[(r_1 - kn_1^2) - m] = 0 \\
+\text{Trivial Solution: } n_1 = 0 \\
+\text{This is when the population is zero, and does not make any sense in our analysis.} \\
+\text{Non-Trivial Solution: } (r_1 - kn_1^2) -m =0 \\
+r_1 -kn_1^2 = m \\
+kn_1^2 = r_1 - m \\
+n_1 = \sqrt{\frac{r_1 -m}{k}} \\
+n_1 = n_{new_{eq}} = \sqrt{\frac{r_1 -m}{k}}
+$$
+
+Some important points about this equilibrium is, $r_1 > m$. If the dispersal rate $m$ is too high relative to the intrinsic growth rate $r_1$, the equilibrium population $n_1$ goes closer to extinction.
+
+f) Population 1 loses a lot of individuals through this one-directional dispersal. Above what value of m does population 1 go extinct? (1p)
+
+2f) Population $n_1$ goes extinct when the equilibrium population size $n_{new_{eq}} = 0$. From the above equation derived for the equilibrium:
+
+$$
+n_{new_{eq}} = \sqrt{\frac{r_1-m}{k}} \\
+\text{For } n_{new_{eq}} \text{ to be zero, the term inside the square root must be zero or negative. This happens when,} \\
+r_1 - m \le 0 \\
+m \ge r_1
+$$
+
+Population 1 goes extinct when the dispersal rate $m$ is greater than or equal to $r_1$. At this point, the rate of loss due to dispersal completely offsets the intrinsic growth rate, making it impossible for population $n_1$ to sustain itself.
+
+$m \lt r_1$: The population can sustain itself despite the dispersal.
+$m \ge r_1$: The population diminishes to extinction due to excessive loss of individuals. To be precise the rate of movement of individuals from population 1 to population 2 is more than the intrinsic growth rate of population 1.
+
+g) Write an R script that simulate the coupled dynamics of $n_1$ and $n_2$ and plots them as function of time.
+
+2g)
+
+We will use a package called deSolve, to solve the ODE.
+
+```{r}
+rm(list = ls())
+# Importing libraries
+library(deSolve)
+library(ggplot2)
+library(tidyr)
+
+# Define the coupled population dynamics
+coupled_dynamics = function (t,state,params) {
+  # Unpack the parameters
+  r1 = params["r1"]
+  r2 = params["r2"]
+  k = params["k"]
+  m = params["m"]
+  
+  # State Variables
+  n1 = state["n1"]
+  n2 = state["n2"]
+  
+  # Dynamics
+  dn1dt = (r1 - k * n1^2) * n1 - m*n1
+  dn2dt = (r2 - k * n2^2) * n2 + m*n1
+  
+  # Return rates of changes as a list
+  list(c(dn1dt,dn2dt))
+
+}
+
+
+# The params and initial_state cane be changed accordingly
+# Parameters
+params = c(r1=1,r2=0.6,k=0.02, m=0.1)
+
+# Initial population sizes
+initial_state = c(n1 = 10, n2 = 3)
+
+# Time steps
+timevec = seq(0,100,by=0.1)
+
+# Solve using the ode function from deSolve package
+output = ode(y = initial_state, times = timevec, func = coupled_dynamics, parms = params)
+
+# Convert output to a data frame for plotting
+output_df = as.data.frame(output)
+
+# Reshape for ggplot2
+population_data = pivot_longer(output_df, cols = c("n1","n2"), names_to = "Population", values_to = "Size")
+
+# Plotting the results
+coupled_dynamics_plot = ggplot(data = population_data, aes(x = time, y = Size, color = Population)) +
+  scale_color_manual(values = c("n1" = "blue", "n2" = "red")) +
+  geom_line(linewidth = 1.5) +
+  labs(
+    title = "Coupled Dynamics of Two Populations (deSolve)",
+    x = "Time",
+    y = "Population Size",
+    caption = "Model: dn1/dt = (r1 - k*n1^2)n1 - m*n1\ndn2/dt = (r2 - k*n2^2)*n2 + m*n1\nParameters: r1 = 1, r2 = 0.6, k = 0.02, m = 0.1"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5, vjust = 0.5, face = "bold"),
+    axis.title = element_text(face = "bold"),
+    plot.caption = element_text(hjust = 0)
+  )
+
+coupled_dynamics_plot
+# Save the plot as a high resolution image
+#ggsave("coupled_dynamics.png",path = "./exam_plots", width = 7, height =5 , dpi=700)
+
+```
+
+# 3. Introgression (6p)
+
+The process of 'foreign' genes entering and becoming established in, a population is called introgression. For example, one can follow the introgression of genes across hybrid zones, where genes can travel from one population (or species) to another. A famous example is the finding that all humans with ancestors from outside Africa have a small proportion of Neanderthal genes, probably a result of hybridization and introgression, that happened a long time ago. We shall now study the process of introgression, keeping things as simple as possible.
+Consider a haploid population of n individuals (n is fixed). Each individual carries a genome of L genes. The genes can be of two types, the old type and the 'new' type. If we represent the old type with zeros and the new type with ones, an individual that carries some old and some new genes could be represented by a sequence like 0110 (for the case L = 4).
+Each generation, the individuals mate randomly and the offspring is formed through recombination. Start the simulation (generation 1) with a single individual with a completely foreign genome.
+For each individual of the next generation:
+
+i) choose two parents randomly from the parent generation
+ii) pair up their genomes and choose a random point of gene crossover
+iii) out the recombined offspring in the next generation
+iv) repeat until the new population is full
+The new population then replaces the old one and the whole procedure repeats. There is no selection for or against the new genes.
+
+a) If you would write a program to simulate this process, what would be appropriate representation of the population, describing the current 'system state'? (1p)
+
+3a) To simulate the process of introgression as described, an appropriate representation of the population and current system state would be:
+
+- To represent each individual in the population by a vector (or string) of the length L, where L is the number of genes in the genome.
+- Each gene in the genome is either 0 (old type) or 1 (new type).
+- The population can then be represented as a matrix. Consider a population size of $n$, 
+
+$$
+population = \{individual_1, individual_2, individual_3.....individual_n\} \\
+\text{where each individual is a vector of length L, e.g.,[0,1,1,0] for L = 4}
+$$
+
+The key elements of the system state:
+
+- *Population size (n):* The fixed number of individuals in each generation.
+- *Genome length (L):* The fixed length of each individual's genome.
+- *Generation:* Keep track of the current generation number.
+- *Population data structure:* A matrix of genomes, where each genome is represented as a vector of zeros and ones.
+
+Consider $n=5$ and $L=4$, the population could look like:
+
+$$
+population = \begin{bmatrix}
+0 & 1 & 1 & 0 \\
+1 & 1 & 0 & 1 \\
+0 & 0 & 1 & 1 \\
+1 & 0 & 0 & 1 \\
+1 & 1 & 1 & 0
+\end{bmatrix} \\
+\text{Each row represents the genome of one individual.}
+$$
+
+b) Write a function in R that takes two parent genomes as input and returns a single recombined offspring genome, following the procedure of recombination described above. (2p)
+
+3b) 
+
+```{r}
+rm(list = ls())
+
+# Function for recombination
+recombination_func = function(parent1, parent2) {
+  # Check if the two parent genome are of the same length
+  if (length(parent1) != length(parent2)) {
+    stop("Parent genomes must be of the same length")
+  }
+  
+  # Get the genome length 
+  genome_length = length(parent1)
+  
+  # Randomly select a crossover point (1 to genome_length - 1)
+  crossover_point = sample(1:(genome_length - 1),1)
+  
+  # Create offspring by combining parts of the two parent genomes
+  offspring = c(parent1[1:crossover_point],parent2[(crossover_point+1):genome_length])
+  
+  return(offspring)
+}
+
+# To ensure the same results every time, we will set the seed.
+# set.seed(42)
+parent1 = c(0,1,1,0,1) # Parent 1 genome
+parent2 = c(1,0,0,1,0) # Parent 2 genome
+
+offspring = recombination_func(parent1,parent2)
+cat("Parent 1 Genome: ", parent1, "\n")
+cat("Parent 2 Genome: ", parent2, "\n")
+cat("Offspring Genome: ", offspring, "\n")
+
+```
+
+c) Write a script in R that uses the above function and simulates the population for 100 generations. For your own convenience, write it such that you can easily change the population size n and the genome size L. (2p)
+
+3c) 
+
+```{r}
+rm(list = ls())
+
+
+# Set the random state
+set.seed(18)
+# Function for recombination
+recombination_func = function(parent1, parent2) {
+  # Check if the two parent genome are of the same length
+  if (length(parent1) != length(parent2)) {
+    stop("Parent genomes must be of the same length")
+  }
+  
+  # Get the genome length 
+  genome_length = length(parent1)
+  
+  # Randomly select a crossover point (1 to genome_length - 1)
+  crossover_point = sample(1:(genome_length - 1),1)
+  
+  # Create offspring by combining parts of the two parent genomes
+  offspring = c(parent1[1:crossover_point],parent2[(crossover_point+1):genome_length])
+  
+  return(offspring)
+}
+
+# Simulation parameters
+n = 10
+L = 8
+generations = 10 # Note: I have on purpose set the generations to 10, for better visualization of results. This can be set to 100 as well, but comment out the cat commands, or you might end up getting a lot of things in the display.
+
+# Initialize the population: start with one individual with a completely foreign genome
+population = matrix(0,nrow = n, ncol = L)
+population[1, ] = rep(1,L) # First individual has a completely foreign genome
+
+
+# Function to simulate one generation
+simulate_generation = function(current_population, n, L, gen_number) {
+  next_population = matrix(0, nrow = n, ncol = L) # Initialize the next generation
+  
+  cat("Generation: ",gen_number, "\n")
+  
+  for (i in 1:n) {
+    # Randomly select two parents
+    parents_indices = sample(1:n, 2, replace = TRUE)
+    parents = current_population[parents_indices, ]
+    
+    cat("Parents for offspring ", i , ":\n")
+    cat("Parent 1 (Index ",parents_indices[1], "):", parents[1,], "\n")
+    cat("Parent 2 (Index ",parents_indices[2], "):", parents[2,], "\n")
+    
+    # Generate an offspring
+    offspring = recombination_func(parents[1,], parents[2,])
+    cat("Offspring ", i, ":", offspring,"\n\n" )
+    
+    # Add the offspring to the next generation
+    next_population[i, ] = offspring
+  
+  }
+  
+  return(next_population)
+}
+
+# Run the simulation
+for (gen in 1:generations) {
+  population = simulate_generation(population, n, L, gen)
+  cat("Population at the end of Generation ", gen, ":\n")
+  print(population)
+  cat("\n-------------------------------------------\n")
+}
+
+
+```
+
+d) Revise the script to calculate the proportion of new genes in the population for each generation. Plot the result as a proportion over time. You may notice that quite often there is no introgression, i.e the new type disappears from the population. Use L = 100 and n = 100 (1p)
+
+3d) 
+
+```{r}
+rm(list = ls())
+
+# Importing Libraries
+library(ggplot2)
+
+#The random state was set to 15 for this analysis. Initial explorations with different random states (e.g., 12 and 18) revealed varying dynamics in the frequency of the new gene type. A random state of 18 produced a wave-like pattern, with the new gene type nearly disappearing before reappearing, a trend that diminished with increasing generations. A random state of 12 showed an immediate sharp decline in the new gene type. The random state of 15 was ultimately selected as it provided a clearer and more sustained observation of the trend of interest.
+
+set.seed(15) 
+# Function for recombination
+recombination_func = function(parent1, parent2) {
+  # Check if the two parent genome are of the same length
+  if (length(parent1) != length(parent2)) {
+    stop("Parent genomes must be of the same length")
+  }
+  
+  # Get the genome length 
+  genome_length = length(parent1)
+  
+  # Randomly select a crossover point (1 to genome_length - 1)
+  crossover_point = sample(1:(genome_length - 1),1)
+  
+  # Create offspring by combining parts of the two parent genomes
+  offspring = c(parent1[1:crossover_point],parent2[(crossover_point+1):genome_length])
+  
+  return(offspring)
+}
+
+# Simulation parameters
+n = 100
+L = 100
+generations = 100
+
+# Initialize the population: start with one individual with a completely foreign genome
+population = matrix(0,nrow = n, ncol = L)
+population[1, ] = rep(1,L) # First individual has a completely foreign genome
+
+
+# Function to simulate one generation
+simulate_generation = function(current_population, n, L, gen_number) {
+  next_population = matrix(0, nrow = n, ncol = L) # Initialize the next generation
+  
+  for (i in 1:n) {
+    # Randomly select two parents
+    parents_indices = sample(1:n, 2, replace = TRUE)
+    parents = current_population[parents_indices, ]
+    
+    # Generate an offspring
+    offspring = recombination_func(parents[1,], parents[2,])
+    
+    # Add the offspring to the next generation
+    next_population[i, ] = offspring
+  
+  }
+  
+  return(next_population)
+}
+
+
+# Track the proportion of new genes in the population
+proportion_new_genes = numeric(generations)
+
+# Run the simulation
+for (gen in 1:generations) {
+  proportion_new_genes[gen] = sum(population) /(n*L)
+  population = simulate_generation(population, n, L, gen)
+}
+
+# Create a data frame from plotting
+data = data.frame(
+  Generation = 1:generations,
+  Proportion = proportion_new_genes
+)
+
+# Plot the result
+prop_gene_plot = ggplot(data, aes(x = Generation, y = Proportion)) +
+  geom_line(color = "blue", linewidth = 1) +
+  labs(
+    title = "Proportion of New Genes Over Generations",
+    x = "Generation",
+    y = "Proportion"
+  ) +
+  theme_classic() + 
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    aspect.ratio = 0.6
+  )
+
+prop_gene_plot
+
+#ggsave("prop_new_genes.png",path = "./exam_plots", width = 7, height =5 , dpi=700)
+```
+
+e) Extra (no points!): After a ling time, say 1000 generations, most new genes (out of the original L) have either gone extinct or come to fixation. The population now has a mixed genome of old and new genes (like non-African humans). Add a few lines to your script to also plot the frequency of new genes at each locus of the final population. You may find short sequences of introgressed genes spread out over the genome, but usually they occur together, side-by-side. Can you think of why? (0p)
+
+```{r}
+rm(list = ls())
+
+# Importing Libraries
+library(ggplot2)
+library(dplyr)
+
+set.seed(15)
+
+# Function for recombination
+recombination_func = function(parent1, parent2) {
+  if (length(parent1) != length(parent2)) {
+    stop("Parent genomes must be of the same length")
+  }
+  
+  genome_length = length(parent1)
+  crossover_point = sample(1:(genome_length - 1), 1)
+  offspring = c(parent1[1:crossover_point], parent2[(crossover_point + 1):genome_length])
+  return(offspring)
+}
+
+# Simulation parameters
+n = 100  # Population size
+L = 100  # Genome length
+generations = 1000
+
+# Initialize the population
+population = matrix(0, nrow = n, ncol = L)
+population[1, ] = rep(1, L)  # First individual has a completely foreign genome
+
+# Function to simulate one generation
+simulate_generation = function(current_population, n, L) {
+  next_population = matrix(0, nrow = n, ncol = L)
+  
+  for (i in 1:n) {
+    parents_indices = sample(1:n, 2, replace = TRUE)
+    parents = current_population[parents_indices, ]
+    offspring = recombination_func(parents[1, ], parents[2, ])
+    next_population[i, ] = offspring
+  }
+  
+  return(next_population)
+}
+
+# Track the proportion of new genes and locus-specific frequencies
+proportion_new_genes = numeric(generations)
+locus_frequencies = matrix(0, nrow = generations, ncol = L)
+
+# Run the simulation
+for (gen in 1:generations) {
+  proportion_new_genes[gen] = sum(population) / (n * L)
+  locus_frequencies[gen, ] = colMeans(population)  # Track frequency at each locus
+  population = simulate_generation(population, n, L)
+}
+
+# Data preparation for overall proportion plot
+data = data.frame(
+  Generation = 1:generations,
+  Proportion = proportion_new_genes
+)
+
+# Plot the overall proportion of new genes
+prop_gene_plot = ggplot(data, aes(x = Generation, y = Proportion)) +
+  geom_line(color = "blue", linewidth = 1) +
+  labs(
+    title = "Proportion of New Genes Over Generations",
+    x = "Generation",
+    y = "Proportion"
+  ) +
+  theme_classic() + 
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    aspect.ratio = 0.6
+  )
+# Prepare data for locus-specific frequencies plot (final generation)
+final_gen_df = data.frame(
+  Locus = 1:L,
+  Frequency = locus_frequencies[generations, ]
+)
+
+# Plot locus-specific frequencies in the final generation
+final_freq_plot = ggplot(final_gen_df, aes(x = Locus, y = Frequency)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  labs(
+    title = "Frequency of New Genes at Each Locus (Final Generation)",
+    x = "Locus",
+    y = "Frequency"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16),
+    axis.title = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    aspect.ratio = 0.6
+  )
+
+# Save the locus-specific plot
+#ggsave("final_locus_frequencies.png", final_freq_plot, path = "exam_plots/", width = 7, height = 5, dpi = 700)
+#ggsave("prop_gene_plot.png", prop_gene_plot, path = "exam_plots/", width = 7, height = 5, dpi = 700)
+
+# Display the plots in RStudio
+prop_gene_plot
+final_freq_plot
+
+
+```
+
+
+# 4. The dynamics of a chemical reaction (4p)
+
+A mixture has two chemical compounds, X and Y. Two units of X can combine and form a single unit of Y. The compound Y is, however, unstable and spontaneously disintegrates into two X. The chemical reactions can be written
+
+$$
+2X \leftrightarrow Y
+$$
+
+The dynamics of the corresponding concentrations, denoted x and y respectively, follow
+
+$$
+\frac{dx}{dt} = -2kx^2 + 2y\mu \\
+\frac{dy}{dt} = kx^2 - y\mu \\
+\text{where } k \text{ and } \mu \text{ are positive constants} 
+$$
+
+a) Show that the system has a whole suite of equilibrium states (which depend on the initial conditions, i.e. x(0) and y(0)) (1p)
+
+4a) We know that at equilibrium condition, the concentration $x$ and $y$ do not change over time, we can now write the differential equation as follows -:
+
+$$
+\frac{dx}{dt} = -2kx^2 + 2y\mu = 0 \text{ --------(Equation 1)}\\ 
+\frac{dy}{dt} = kx^2 - y\mu  = 0 \text{ -------------(Equation 2)}\\
+$$
+
+$$
+\text{From the first equation:} \\
+-2kx^2 + 2y\mu = 0 \Rightarrow kx^2 = y\mu \\
+\text{From the second equation: } \\
+ kx^2 - y\mu  = 0 \Rightarrow kx^2 = y\mu
+$$
+
+Both the equations reduce to same condition. By rearranging we get, $y = \frac{k}{\mu}x^2$. This equilibrium condition means that any pair of (x,y) satisfying this relation is an equilibrium state. Importantly: 
+
+- The equilibrium states depend on the initial conditions x(0) and y(0) because the system evolves dynamically to reach a state where $y = \frac{k}{\mu}x^2$.
+- For any non-negative value of x, there exists a corresponding value of y such that the condition $y = \frac{k}{\mu}x^2$ holds true.
+- Therefore, the system has a continuous suite of equilibrium states determined by the initial concentrations x(0) and y(0). 
+- The concentration of x and y must be non-negative (since they represent chemical concentrations.)
+
+$$
+x \ge 0 \text{ and } y = \frac{k}{\mu}x^2 \ge 0 \\
+\text{This further confirms that the equilibrium states are valid for all non-negative x.}
+$$
+
+b) Write an R script that plots the possible equilibrium in the xy phase plane (1p) (Any positive values of k and $\mu$ will do.)
+
+4b)
+```{r}
+rm(list = ls())
+
+# Importing Libraries
+library(ggplot2)
+
+# Define parameters
+k = 0.5
+mu = 0.2
+
+# Generate a sequence of x values (non-negative as the chemical concentration cannot be less than zero.)
+x_values = seq(0,10,by=0.1)
+
+# Calculate corresponding y values using the equilibrium condition: y = (k/mu)*x^2
+y_values = (k/mu) * x_values^2
+
+# Create a data frame for plotting
+eqb_data = data.frame(x = x_values, y = y_values)
+
+# Plot the equilibrium curve in the xy phase plane
+eqb_curve = ggplot(data = eqb_data, aes(x,y)) + 
+  geom_line(color = "blue", linewidth = 1) +
+  labs(
+    title = "Equilibrium States in the xy Phase Plane",
+    x = "Concentration of X (x)",
+    y = "Concentraion of Y (y)",
+  ) + 
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    axis.title = element_text(face = "bold"),
+  )
+
+eqb_curve
+
+# Save the plot
+#ggsave("eqb_phase_plane.png",path = "./exam_plots", width = 7, height =5 , dpi=700)
+
+```
+
+c) Write another script that simulates the differential equations equations above, using a few different initial conditions, and plots the results in two ways: i) as x and y vs. time and ii) in the phase plane together with solutions in b). (2p)
+
+4c) 
+
+```{r}
+rm(list = ls())
+
+# Import Required Libraries
+library(deSolve)
+library(ggplot2)
+
+# Define the ODE system for reaction dynamics
+reaction_dynamics = function(t, state, parameters) {
+  x = state[1]
+  y = state[2]
+  
+  k = parameters$k  # Forward reaction rate constant (positive)
+  mu = parameters$mu  # Backward reaction rate constant (positive)
+  
+  dxdt = -(2 * k * x^2) + (2 * mu * y)
+  dydt = (k * x^2) - (mu * y)
+  
+  return(list(c(dxdt, dydt)))
+}
+
+# Define parameters and initial conditions
+params = list(k = 0.5, mu = 0.2)
+initial_conditions = list(
+  c(x = 0.5, y = 0.1),
+  c(x = 2, y = 1),
+  c(x = 1, y = 2)
+)
+time = seq(0, 10, by = 0.1)
+
+# Solve the ODEs for each initial condition
+solve_reaction_dynamics = function(initial_cond, params, time) {
+  as.data.frame(ode(
+    y = initial_cond,
+    times = time,
+    func = reaction_dynamics,
+    parms = params
+  ))
+}
+
+# Simulate for all initial conditions and add labels
+simulation_results = lapply(seq_along(initial_conditions), function(i) {
+  result = solve_reaction_dynamics(initial_conditions[[i]], params, time)
+  result$Condition = paste("Condition", i)
+  return(result)
+})
+
+# Combine simulation results into a single data frame
+results_df = do.call(rbind, simulation_results)
+
+# Create a caption string listing the initial conditions
+initial_conditions_caption = paste(
+  "Initial Conditions:",
+  paste(
+    lapply(seq_along(initial_conditions), function(i) {
+      sprintf("Condition %d: (x = %.1f, y = %.1f)", i, initial_conditions[[i]]["x"], initial_conditions[[i]]["y"])
+    }),
+    collapse = "; "
+  )
+)
+
+# 4c i) Plot dynamics of X and Y over time
+time_plot = ggplot(results_df, aes(x = time)) +
+  geom_line(aes(y = x, color = "Concentration of X"), linewidth = 1) +
+  geom_line(aes(y = y, color = "Concentration of Y"), linewidth = 1) +
+  facet_wrap(~Condition, scales = "free_y") +
+  labs(
+    title = "Dynamics of X and Y Over Time",
+    x = "Time",
+    y = "Concentration",
+    color = "Legend",
+    caption = initial_conditions_caption
+  ) +
+  scale_color_manual(
+    values = c(
+      "Concentration of X" = "red",
+      "Concentration of Y" = "blue"
+    )
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    axis.title = element_text(face = "bold"),
+    legend.position = "bottom",
+    plot.caption = element_text(hjust = 0, face = "italic", size = 10)
+  )
+
+#4c ii) Plot phase plane with trajectories and equilibrium curve
+plot_phase_plane = function(simulations, params) {
+  # Generate the equilibrium curve
+  x_vals = seq(0, 10, by = 0.1)
+  y_vals = (params$k / params$mu) * x_vals^2
+  equilibrium_curve = data.frame(x = x_vals, y = y_vals)
+  
+  # Combine simulation data for plotting
+  combined_data = do.call(rbind, lapply(seq_along(simulations), function(i) {
+    df = simulations[[i]]
+    df$Simulation = paste("Condition", i)
+    return(df)
+  }))
+  
+  ggplot() +
+    # Plot equilibrium curve
+    geom_line(data = equilibrium_curve, aes(x = x, y = y), color = "blue", linetype = "dashed", linewidth = 1) +
+    # Plot trajectories
+    geom_path(data = combined_data, aes(x = x, y = y, color = Simulation), linewidth = 1) +
+    # Highlight initial points
+    geom_point(data = combined_data[combined_data$time == 0, ], 
+               aes(x = x, y = y, color = Simulation), size = 3) +
+    labs(
+      title = "Phase Plane with Trajectories and Equilibrium Curve",
+      x = "Concentration of X",
+      y = "Concentration of Y",
+      color = "Condition"
+    ) +
+    coord_cartesian(xlim = c(0, 2.5), ylim = c(0, 5)) + # Set axis limits, for better visualization.
+    theme_classic() +
+    theme(
+      plot.title = element_text(hjust = 0.5, face = "bold"),
+      axis.title = element_text(face = "bold")
+    )
+}
+
+# Generate the phase plane plot
+phase_plane_plot = plot_phase_plane(simulation_results, params)
+
+# Display plots
+print(time_plot)
+#ggsave(plot = time_plot,"time_plot.png",path = "./exam_plots", width = 9, height =5 , dpi=700)
+
+print(phase_plane_plot)
+#ggsave(plot = phase_plane_plot, "phase_plane_traj.png",path = "./exam_plots", width = 7, height =5 , dpi=700)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+.
+├── data
+│   ├── female_CS.csv
+│   ├── female_CV.csv
+│   ├── male_CS.csv
+│   └── male_CV.csv
+├── file_struct.txt
+├── final_exam_bios14.pdf
+├── README.md
+├── results
+│   ├── anova_combined_plot.png
+│   ├── coefficients_plot.png
+│   ├── fpl_histogram.png
+│   ├── fpl_qq.png
+│   ├── fpw_histogram.png
+│   ├── fpw_qq.png
+│   ├── interaction_contour_plot.png
+│   ├── predicted_probabilities_plot.png
+│   ├── thorl_vs_thorw_scatter.png
+│   └── threshold_plot.png
+└── scripts
+    ├── damselflies.html
+    ├── damselflies.log
+    ├── damselflies.Rmd
+    └── damselflies.tex
+
+4 directories, 21 files

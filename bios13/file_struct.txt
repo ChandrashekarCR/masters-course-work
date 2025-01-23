@@ -1,0 +1,34 @@
+.
+├── docs
+│   ├── bios13_exam_question_1.pdf
+│   ├── bios13_exam_question_2.pdf
+│   ├── bios13_exam_question_2.pptx
+│   ├── bios13_exam_question_3.pdf
+│   ├── bios13_exam_question_3.pptx
+│   ├── bios13_exam_question_4.pdf
+│   └── bios13_exam_question_4.pptx
+├── file_struct.txt
+├── README.md
+└── scripts
+    ├── 2c.R
+    ├── 2g.R
+    ├── 3b.R
+    ├── 3c.R
+    ├── 3d.R
+    ├── 3e.R
+    ├── 4b.R
+    ├── 4c.R
+    ├── exam_24-25.html
+    ├── exam_24-25.Rmd
+    └── exam_plots
+        ├── coupled_dynamics.png
+        ├── eqb_phase_plane.png
+        ├── final_locus_frequencies.png
+        ├── phase_plane_traj.png
+        ├── population_dynamics.png
+        ├── prop_gene_plot.png
+        ├── prop_new_genes.png
+        ├── time_plot.png
+        └── xor_plot.png
+
+4 directories, 28 files
