@@ -25,5 +25,13 @@ This folder encompasses:
 - Scripts in R and related files (RMarkdown, LaTeX, and logs) for statistical analysis and data visualization.
 - Results including ANOVA plots, histograms, QQ plots, scatter plots, and contour plots to analyze interactions and thresholds.
 
+### 4. BINP28 - DNA Sequence Informatics I
+
+This repository contains a bash script (`variant_processing.sh`) that performs a comprehensive downstream analysis of a Variant Call Format (VCF) file. The analysis includes variant filtering, population structure inference using ADMIXTURE, and phylogenetic tree construction.  The script utilizes several bioinformatics tools, including `bcftools`, `vcftools`, `plink`, `iqtree2`, `fastme`, and `R`.
+
+This folder includes:
+- A scripts folder that contains all the scripts used for the analysis.
+- It also contains a README.md file and an environment YML file. 
+
 ## Note
 The materials in this repository represent only the coding-focused courses I have taken. They include a variety of exercises, assignments, and exams that were submitted and completed during the program. See each folder for a detailed explanation of the projects, exams and exercises.
