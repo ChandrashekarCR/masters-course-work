@@ -1,0 +1,24 @@
+.
+├── bin
+│   ├── gffParse.pl
+│   ├── gmes_petap.pl
+│   └── gm_key_64
+├── data
+│   ├── 01_raw_data
+│   ├── 02_genemark
+│   ├── 03_haemoproteus
+│   ├── 04_blast
+│   ├── 05_proteinortho
+│   ├── 06_busco
+│   ├── 07_alignments
+│   └── 08_raxml
+├── file_struct.txt
+├── README.md
+├── results
+└── scripts
+    ├── busco_protein_fasta.py
+    ├── datParser.py
+    ├── filtering_scafolds.py
+    └── malaria_pipeline.sh
+
+13 directories, 9 files
