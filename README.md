@@ -62,6 +62,38 @@ A dedicated conda environment (`malaria_env`) manages dependencies, with an addi
 
 This project provides a structured approach to investigating *Plasmodium* evolution and comparative genomics through automated bioinformatics workflows.
 
+### 6.BINP29 - Ancestry Map - A tool to visualize local acestry
+
+This project focuses on biogeographical analysis by determining an individual's geographical origins based on their DNA at a local ancestry level. Unlike global ancestry, which provides overall genetic composition, local ancestry breaks the genome into smaller chromosomal segments to infer their geographical origins. The Geographical Population Structure (GPS) algorithm, developed by Elhaik et al. (2014), plays a crucial role in this analysis, allowing for a more detailed understanding of genetic heritage.
+
+This pipeline processes Q_files, BIM, and FAM files, runs the GPS algorithm in parallel, merges segment predictions, and generates a dataset for visualization through a web application.
+
+#### Project Workflow
+
+1. **Input Data Preparation**
+   - Process Q_files, BIM, and FAM files.
+   - Q_files contain admixture proportions for 1069 individuals across 9 gene pools.
+   - Output: Prepared dataset for GPS.
+
+2. **Run GPS Algorithm (Parallel Processing)**
+   - Process multiple individuals in parallel using the Ray framework.
+   - Reduces runtime significantly from hours to ~12 minutes.
+
+3. **Merge Chromosome Predictions**
+   - Calculate Haversine distance between adjacent segments.
+   - Merge segments based on a user-defined threshold.
+
+4. **Prepare Files for Re-running GPS**
+   - Split merged predictions into smaller files (1000 entries each) for efficiency.
+
+5. **Re-run GPS Algorithm on Split Files**
+   - Obtain refined geographical coordinates for merged segments.
+
+6. **Final Merge for Plotting Dataset**
+   - Adjust segments falling in water bodies.
+   - Map each segment to a country and continent.
+   - Prepare dataset for visualization.
+
 
 ## Note
 The materials in this repository represent only the coding-focused courses I have taken. They include a variety of exercises, assignments, and exams that were submitted and completed during the program. See each folder for a detailed explanation of the projects, exams and exercises.
