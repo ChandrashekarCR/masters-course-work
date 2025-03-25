@@ -33,5 +33,35 @@ This folder includes:
 - A scripts folder that contains all the scripts used for the analysis.
 - It also contains a README.md file and an environment YML file. 
 
+### 5. BINP29 - Malaria Phylogenetics and Comparative Genomics Project
+
+This folder contains scripts, data, and results related to a bioinformatics pipeline developed for the phylogenetic and comparative genomic analysis of *Plasmodium* species. The core of the project is the `malaria_pipeline.sh` script, which automates genome filtering, gene prediction, ortholog identification, and phylogenetic tree reconstruction using RAxML.
+
+#### **Folder Structure:**
+- **Scripts**: Contains essential scripts, including:
+  - `malaria_pipeline.sh`: The main pipeline script for processing genomic data.
+  - `filtering_scaffolds.py`: Python script for filtering *Haemoproteus tartakovskyi* genome scaffolds based on GC content and length.
+  - `busco_protein_fasta.py`: Extracts protein sequences for BUSCO analysis.
+  - `datParser.py`: Parses and extracts relevant genomic information from `.dat` files.
+
+#### **Pipeline Overview:**
+The `malaria_pipeline.sh` script executes the following steps:
+1. **Data Preprocessing:**
+   - Calculates genome size and GC content.
+   - Extracts gene counts from annotation files.
+2. **Genome Filtering:**
+   - Removes *Haemoproteus tartakovskyi* scaffolds with GC content >28% and length <3000 nt.
+3. **Gene Prediction:**
+   - Uses GeneMark-ES for gene prediction.
+4. **Functional Annotation:**
+   - Performs BLASTx searches against SwissProt to identify homologous genes.
+5. **Phylogenetic Analysis:**
+   - Aligns sequences and constructs maximum-likelihood phylogenetic trees with RAxML.
+
+A dedicated conda environment (`malaria_env`) manages dependencies, with an additional `busco_env` for BUSCO analysis. The repository ensures reproducibility by specifying software environments and input data locations.
+
+This project provides a structured approach to investigating *Plasmodium* evolution and comparative genomics through automated bioinformatics workflows.
+
+
 ## Note
 The materials in this repository represent only the coding-focused courses I have taken. They include a variety of exercises, assignments, and exams that were submitted and completed during the program. See each folder for a detailed explanation of the projects, exams and exercises.
