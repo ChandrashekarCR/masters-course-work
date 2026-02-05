@@ -1,0 +1,645 @@
+import os
+from pathlib import Path
+
+ROOT_DIR = Path.cwd()
+DATA_DIR = f"{ROOT_DIR}/data/Colonies"
+RESULTS_DIR = f"{ROOT_DIR}/results/"
+TOOL_IMAGES = f"{ROOT_DIR}/bin/images"
+REF_DB = f"{ROOT_DIR}/data/chimera_database/gold.fasta"
+MAP_PL = f"{ROOT_DIR}/src/map.pl"
+RDP_CLASSIFIER = f"{ROOT_DIR}/data/rdp_database/rdp_classifier_2.14/dist/classifier.jar"
+
+SAMPLES = ["CT_A","CT_B","CT_C","CT_D","MA_A","MA_B","MA_C"]
+READS = ["1","2"]
+
+rule all:
+    input:
+        # What I want - Initial Fastqc report files
+        # Fastqc generates two files when it is running. The first one is the html file and then next is the zip file.
+        # We can just keep track of one of the file like for example the html file.
+        expand(f"{ROOT_DIR}/results/01_fastqc/{{prefix}}_{{read}}_fastqc.html",
+            prefix = SAMPLES,
+            read = READS),
+
+        # What do I want - Trimmomatic output files
+        # Trimmomatic gives the following output files
+        # What I want - Fastqc report on the trimmed reads
+        expand(f"{ROOT_DIR}/results/03_fastqc_trimmed/{{prefix}}_{{read}}{{pairing}}_fastqc.html",
+        prefix = SAMPLES,
+        read = READS,
+        pairing = ["P","U"]),
+    
+        # What I want - Merged and unmerged reads
+        #expand(f"{ROOT_DIR}/results/04_merged_reads/{{prefix}}_{{align}}.fastq",
+        #prefix = SAMPLES,
+        #align = ["aligned","unaligned"]),
+
+        # What I want - Dereplication files
+        #expand(f"{ROOT_DIR}/results/05_precluster/{{prefix}}.derep.fasta",
+        #   prefix = SAMPLES),
+    
+        # What I want - Pooled reads. Combine all the reads of the derep.fasta into all_combined.fasta
+        #f"{ROOT_DIR}/results/05_precluster/all_combined.fasta",
+
+        # What I want - The de-replicated full set of pooled reads
+        #f"{ROOT_DIR}/results/05_precluster/all_derep.fasta",
+
+        # What I want - I want the preliminary clustering of the de-replicated set of pooled reads
+        #f"{ROOT_DIR}/results/05_precluster/all_preclust.fasta",
+
+        # What I want - Chimeras from the denovo based chimera checking
+        #expand(f"{ROOT_DIR}/results/06_chimera/{{filename}}",
+        #    filename = ['all.denovo.nonchimeras.fasta','all.denovo.chimeras.fasta','all.denovo.uchime']),
+        
+        # What I want - Non chimeras from the reference based chimeras checking
+        #expand(f"{ROOT_DIR}/results/06_chimera/{{filename}}",
+        #    filename = ['all.ref.nonchimeras.fasta','all.ref.chimeras.fasta','all.ref.uchime']),
+        
+        # WHat I want - All non chimeric read which are de replicated and renamed
+        #f"{ROOT_DIR}/results/07_clustering/all_nonchimeras.renamed.fasta",
+
+        # What I want - The otus after cluster of the de replicated and renamed non chimeric reads
+        #f"{ROOT_DIR}/results/07_clustering/otus.tsv",
+
+        # What I want - The relative sequence abundance of the OTUs
+        f"{ROOT_DIR}/results/07_clustering/all.fixedRank"
+
+
+rule fastqc:
+    input:
+        fastq_files = f"{ROOT_DIR}/data/Colonies/{{prefix}}_{{read}}.fastq"
+    output:
+        fastqc_html = f"{ROOT_DIR}/results/01_fastqc/{{prefix}}_{{read}}_fastqc.html",
+        fastqc_zip = f"{ROOT_DIR}/results/01_fastqc/{{prefix}}_{{read}}_fastqc.zip"
+        
+    params:
+        output_dir = f"{ROOT_DIR}/results/01_fastqc",
+        threads = 4,
+        fastqc_img = f"{TOOL_IMAGES}/fastqc.sif",
+        log_file = f"{ROOT_DIR}/results/01_fastqc/{{prefix}}.log"
+    shell:
+        """
+        if [ ! -d {params.output_dir} ]; then \
+            echo "Directory does not exist."
+            echo "Creating a Directory."
+            mkdir -p {params.output_dir}
+        else \
+            echo "Directory exists."
+        fi
+
+        print_header () {{
+            local message=$1;
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo "$message"
+            printf "%.0s=" {{1..80}}
+            echo ""
+        }}
+
+        print_header "Running FastQC"
+
+        apptainer exec {params.fastqc_img}/ \
+        fastqc {input.fastq_files}  \
+            -o {params.output_dir} \
+            -t {params.threads} > {params.log_file} 2>&1 \
+        
+        echo "Done"
+        """
+
+
+rule trimmomatic:
+    input:
+        # Raw fastq files
+        fwd_fastq = f"{ROOT_DIR}/data/Colonies/{{prefix}}_1.fastq",
+        rev_fastq = f"{ROOT_DIR}/data/Colonies/{{prefix}}_2.fastq"
+    output:
+        # This part is to define the output files individually
+        fwd_pair = f"{ROOT_DIR}/results/02_trimmed_fastq/{{prefix}}_1P.fastq",
+        fwd_unpair = f"{ROOT_DIR}/results/02_trimmed_fastq/{{prefix}}_1U.fastq",
+        rev_pair = f"{ROOT_DIR}/results/02_trimmed_fastq/{{prefix}}_2P.fastq",
+        rev_unpair = f"{ROOT_DIR}/results/02_trimmed_fastq/{{prefix}}_2U.fastq"
+    params:
+        output_dir = f"{ROOT_DIR}/results/02_trimmed_fastq",
+        log_file = f"{ROOT_DIR}/results/02_trimmed_fastq/{{prefix}}.log",
+        baseout = f"{ROOT_DIR}/results/02_trimmed_fastq/{{prefix}}.fastq",
+        thread = 4,
+        trimmomatic_img = f"{TOOL_IMAGES}/trimmomatic.sif"
+    shell:
+        """
+        if [ ! -d {params.output_dir} ]; then \
+            echo "Directory does not exist."
+            echo "Creating a Directory."
+            mkdir -p {params.output_dir}
+        else \
+            echo "Directory exists."
+        fi
+
+        print_header () {{
+            local message=$1;
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo "$message"
+            printf "%.0s=" {{1..80}}
+            echo ""
+        }}
+
+        print_header "Running Trimmomatic"
+        
+        apptainer exec {params.trimmomatic_img} trimmomatic PE \
+            {input.fwd_fastq} {input.rev_fastq} \
+            -baseout {params.baseout} \
+            -threads {params.thread} \
+            -trimlog {params.log_file}\
+            LEADING:20 \
+            TRAILING:20 \
+            SLIDINGWINDOW:8:15 \
+            MINLEN:140\
+            AVGQUAL:20
+        
+        echo "Done"
+        """
+
+rule fastqc_trimmed:
+    input:
+        # Input of the trimmed reads
+        trimmed_fastq = f"{ROOT_DIR}/results/02_trimmed_fastq/{{prefix}}_{{read}}{{pairing}}.fastq"
+    output:
+        fastqc_html = f"{ROOT_DIR}/results/03_fastqc_trimmed/{{prefix}}_{{read}}{{pairing}}_fastqc.html",
+        fastqc_zip = f"{ROOT_DIR}/results/03_fastqc_trimmed/{{prefix}}_{{read}}{{pairing}}_fastqc.zip"
+
+    params:
+        output_dir = f"{ROOT_DIR}/results/03_fastqc_trimmed",
+        threads = 4,
+        fastqc_img = f"{TOOL_IMAGES}/fastqc.sif",
+        log_file = f"{ROOT_DIR}/results/03_fastqc_trimmed/{{prefix}}_{{read}}{{pairing}}.log"
+    shell:
+        """
+        # Check if directory exists
+        if [ ! -d {params.output_dir} ]; then \
+            echo "Output directory does not exist."
+            echo "Creating directory."
+            mkdir -p {params.output_dir}
+        else
+            echo "Directory exists"
+        fi
+
+        # Running Fastqc on the trimmed files
+        print_header () {{
+            local message=$1
+
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo "$message"
+            printf "%.0s=" {{1..80}}
+            echo ""        
+        }}
+
+        print_header "Running Fastqc on trimmed files"
+
+        apptainer exec {params.fastqc_img} \
+        fastqc {input.trimmed_fastq} \
+            -o {params.output_dir} \
+            -t {params.threads} > {params.log_file} 2>&1
+        
+        echo "Done"
+        """
+
+rule merge_reads:
+    input:
+        trimmed_fastq_fwd = f"{ROOT_DIR}/results/02_trimmed_fastq/{{prefix}}_1P.fastq",
+        trimmed_fastq_rev = f"{ROOT_DIR}/results/02_trimmed_fastq/{{prefix}}_2P.fastq"
+    output:
+        merged_reads = f"{ROOT_DIR}/results/04_merged_reads/{{prefix}}_aligned.fastq",
+        unmerged_reads = f"{ROOT_DIR}/results/04_merged_reads/{{prefix}}_unaligned.fastq"
+    params:
+        output_dir = f"{ROOT_DIR}/results/04_merged_reads",
+        threads = 4,
+        pandaseq_img = f"{TOOL_IMAGES}/pandaseq.sif",
+        log_file = f"{ROOT_DIR}/results/04_merged_reads/{{prefix}}.log"
+
+    shell:
+        """
+        if [ ! -d {params.output_dir} ]; then \
+            echo "Directory does not exist."
+            echo "Creating a Directory."
+            mkdir -p {params.output_dir}
+        else \
+            echo "Directory exists."
+        fi
+
+        print_header () {{
+
+            local message=$1
+
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo "$message"
+            printf "%.0s=" {{1..80}}
+            echo ""
+        
+        }}
+
+        # Run the pandaseq command
+        apptainer exec {params.pandaseq_img} \
+        pandaseq \
+            -f {input.trimmed_fastq_fwd} \
+            -r {input.trimmed_fastq_rev} \
+            -g {params.log_file} \
+            -u {output.unmerged_reads} \
+            -w {output.merged_reads} \
+            -F 
+
+        echo "Done."        
+        """
+
+
+rule preliminary_dereplication:
+    input:
+        # Input files from the merged reads
+        merged_reads = f"{ROOT_DIR}/results/04_merged_reads/{{prefix}}_aligned.fastq"
+    output:
+        # Dereplicated reads
+        derep_reads = f"{ROOT_DIR}/results/05_precluster/{{prefix}}.derep.fasta"
+    params:
+        output_dir = f"{ROOT_DIR}/results/05_precluster",
+        vsearch = f"{ROOT_DIR}/bin/vsearch_github_bin/bin/vsearch",
+        log_file = f"{ROOT_DIR}/results/05_precluster/{{prefix}}.log" # We do no need to create a log file as vsearch already does this in this step
+    shell:
+        """
+        # Create directpry if it does not exists
+        if [ ! -d {params.output_dir} ]; then \
+            echo "Directoru does not exist. Creating a directory.."
+            mkdir -p {params.output_dir}
+        else 
+            echo "Directory alread exists"
+        fi
+
+        print_header () {{
+
+            local message=$1
+            
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo "$message"
+            printf "%.0s=" {{1..80}}
+            echo ""
+        
+        }}
+
+        print_header "Running Vsearch"
+
+        # Run vsearch
+        {params.vsearch} \
+            --fastx_uniques {input.merged_reads} \
+            --strand plus \
+            --sizeout \
+            --relabel {wildcards.prefix} \
+            --fasta_width 0 \
+            --fastaout {output.derep_reads} > {params.log_file}.log 2>&1
+
+        echo "Vsearch done."
+        """
+
+rule pool_derep_reads:
+    input:
+        # We use the expand here to give all the derep reads at once to concatenate
+        derep_reads = expand(f"{ROOT_DIR}/results/05_precluster/{{prefix}}.derep.fasta",
+        prefix = SAMPLES)
+    output:
+        combined_fasta = f"{ROOT_DIR}/results/05_precluster/all_combined.fasta"
+    shell: 
+        """
+        print_header () {{
+            local message=$1
+
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo "$message"
+            printf "%.0s=" {{1..80}}
+            echo ""        
+        }}
+
+        print_header "Combining all de-replicated reads"
+        cat {input.derep_reads} > {output.combined_fasta}
+
+        echo "Done"        
+        """
+
+rule derep_pooled_reads:
+    input:
+        all_combined_reads = f"{ROOT_DIR}/results/05_precluster/all_combined.fasta"
+    
+    output:
+        all_derep_reads = f"{ROOT_DIR}/results/05_precluster/all_derep.fasta",
+        all_derep_uc = f"{ROOT_DIR}/results/05_precluster/all_derep.uc"
+
+    params:
+        vsearch = f"{ROOT_DIR}/bin/vsearch_github_bin/bin/vsearch",
+        output_dir = f"{ROOT_DIR}/results/05_precluster/",
+        log_file = f"{ROOT_DIR}/results/05_precluster/dereplicated_full_set.log" 
+    shell:
+        """
+        print_header () {{
+            local message=$1
+
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo "$message"
+            printf "%.0s=" {{1..80}}
+            echo ""        
+        }}
+
+        print_header "Dereplicating full set of reads"
+        
+        # De-replicated full set of reads
+        {params.vsearch} \
+            --derep_fulllength {input.all_combined_reads} \
+            --sizein \
+            --sizeout \
+            --fasta_width 0 \
+            --uc {output.all_derep_uc} \
+            --output {output.all_derep_reads} > {params.log_file} 2>&1
+
+        echo "Done"
+        """
+
+rule preliminary_clustering:
+    input:
+        all_derep_fasta =  f"{ROOT_DIR}/results/05_precluster/all_derep.fasta"
+    output:
+        all_prelim_cluster_fasta =  f"{ROOT_DIR}/results/05_precluster/all_preclust.fasta",
+        all_prelim_cluster_uc = f"{ROOT_DIR}/results/05_precluster/all_preclust.uc"
+    params:
+        vsearch = f"{ROOT_DIR}/bin/vsearch_github_bin/bin/vsearch",
+        output_dir = f"{ROOT_DIR}/results/05_precluster/",
+        log_file = f"{ROOT_DIR}/results/05_precluster/prelim_cluster.log"
+    shell:
+        """
+        print_header () {{
+            local message=$1
+
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo "$message"
+            printf "%.0s=" {{1..80}}
+            echo ""        
+        }}
+
+        print_header "Prelimnary clustering of reads"
+        # Prelimnary clustering of reads
+        {params.vsearch} \
+            --cluster_size {input.all_derep_fasta} \
+            --id 0.97 \
+            --sizein \
+            --sizeout \
+            --strand plus \
+            --fasta_width 0 \
+            --uc {output.all_prelim_cluster_uc} \
+            --centroids {output.all_prelim_cluster_fasta} > {params.log_file} 2>&1
+        
+        echo "Done"
+
+        """
+
+rule denovo_chimera_checking:
+    input:
+        # All preliminary cluster file
+        all_prelimclust_fasta = f"{ROOT_DIR}/results/05_precluster/all_preclust.fasta"
+    output:
+        # This will output three files non chimeras, chimeraas and an all_file compatible with uchime version 5
+        chimeras = f"{ROOT_DIR}/results/06_chimera/all.denovo.chimeras.fasta",
+        nonchimeras = f"{ROOT_DIR}/results/06_chimera/all.denovo.nonchimeras.fasta",
+        all_denovo = f"{ROOT_DIR}/results/06_chimera/all.denovo.uchime"
+
+    params:
+        vsearch = f"{ROOT_DIR}/bin/vsearch_github_bin/bin/vsearch",
+        log_file = f"{ROOT_DIR}/results/06_chimera/all.denovo.log",
+        threads = 4
+
+    shell:
+        """
+        print_header () {{
+            local message=$1
+
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo "$message"
+            printf "%.0s=" {{1..80}}
+            echo ""        
+        }}
+
+        print_header "Denovo based chimera checking"
+        # Denovo based chimera checking
+        {params.vsearch} \
+            --uchime3_denovo {input.all_prelimclust_fasta} \
+            --threads {params.threads} \
+            --sizein \
+            --sizeout \
+            --fasta_width 0 \
+            --nonchimeras {output.nonchimeras} \
+            --chimeras {output.chimeras} \
+            --uchimeout {output.all_denovo} > {params.log_file} 2>&1
+
+        """
+rule reference_base_chimera_check:
+    input:
+        # All the denovo non chimeras will be the input file.
+        # The idea is that the ones that were classified as non chimeras will be checked based on reference for chimeras
+        denovo_non_chimera_file = f"{ROOT_DIR}/results/06_chimera/all.denovo.nonchimeras.fasta",
+        ref_database = REF_DB
+    
+    output:
+        # This will output three files, all non-chimeras, chimeras and a uchime file
+        ref_chimeras = f"{ROOT_DIR}/results/06_chimera/all.ref.chimeras.fasta",
+        ref_nonchimeras = f"{ROOT_DIR}/results/06_chimera/all.ref.nonchimeras.fasta",
+        all_ref = f"{ROOT_DIR}/results/06_chimera/all.ref.uchime"
+    
+    params:
+        vsearch = f"{ROOT_DIR}/bin/vsearch_github_bin/bin/vsearch",
+        log_file = f"{ROOT_DIR}/results/06_chimera/all.ref.log",
+        threads = 4
+    
+    shell:
+        """
+        print_header () {{
+            local message=$1
+
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo "$message"
+            printf "%.0s=" {{1..80}}
+            echo ""        
+        }}
+
+        print_header "Reference based chimera checking"
+        # Reference based chimera checking
+        {params.vsearch} \
+            --uchime_ref {input.denovo_non_chimera_file} \
+            --db {input.ref_database} \
+            --sizein \
+            --sizeout \
+            --fasta_width 0 \
+            --nonchimeras {output.ref_nonchimeras} \
+            --chimeras {output.ref_chimeras} \
+            --uchimeout {output.all_ref} > {params.log_file} 2>&1
+
+        """
+
+rule retrive_filtered_original_reads:
+    input:
+        all_derep = f"{ROOT_DIR}/results/05_precluster/all_derep.fasta",
+        all_preclust = f"{ROOT_DIR}/results/05_precluster/all_preclust.uc",
+        all_ref_nonchimeras = f"{ROOT_DIR}/results/06_chimera/all.ref.nonchimeras.fasta",
+        all_combined_fasta = f"{ROOT_DIR}/results/05_precluster/all_combined.fasta",
+        all_derep_uc = f"{ROOT_DIR}/results/05_precluster/all_derep.uc"
+    
+    output:
+        all_non_chimeras_derep = f"{ROOT_DIR}/results/07_clustering/all.nonchimeras.derep.fasta",
+        all_non_chimeras_fasta = f"{ROOT_DIR}/results/07_clustering/all.nonchimeras.fasta",
+        all_non_chimeras_renamed_fasta = f"{ROOT_DIR}/results/07_clustering/all_nonchimeras.renamed.fasta"
+    
+    params:
+        perl_script = MAP_PL,
+        output_dir = f"{ROOT_DIR}/results/07_clustering"
+    
+    shell:
+        """ 
+        if [ ! -d {params.output_dir} ]; then \
+            echo "Directory does not exist. Creating one..."
+            mkdir -p {params.output_dir}
+        else \
+            echo "Directory already exists."
+        fi
+
+        print_header () {{
+            local message=$1
+
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo "$message"
+            printf "%.0s=" {{1..80}}
+            echo ""        
+        }}
+
+        print_header "Extracting all reads belonging to non-chimeric preclusters"
+        # Extract all reads belonging to non-chimeric precluters
+        # all_derep.fasta - all reads dereplicated across colonies
+        # all_preclust.uc - information about the clustering step
+        # all.ref.nonchimeras.fasta - preclusters classified as non chimeric
+
+        {params.perl_script} \
+            {input.all_derep} \
+            {input.all_preclust} \
+            {input.all_ref_nonchimeras} > \
+            {output.all_non_chimeras_derep}
+
+        # Next, we extract all non-chimeric reads
+        # all_combined.fasta -  the starting set of reads
+        # all.derep.uc - information about the derplication step
+        # all.nonchimeras.derep.fasta - dereplicated sequences classified as non-chimeric (from the previous step)
+
+
+        print_header "Extract all non-chimeric reads"
+        {params.perl_script} \
+            {input.all_combined_fasta} \
+            {input.all_derep_uc} \
+            {output.all_non_chimeras_derep} > {output.all_non_chimeras_fasta}
+
+        cat {output.all_non_chimeras_fasta} | sed "s/[0-9]\\+;/;/g" > {output.all_non_chimeras_renamed_fasta}
+        """
+rule final_clustering:
+    input:
+        all_non_chimeras_renamed_fasta = f"{ROOT_DIR}/results/07_clustering/all_nonchimeras.renamed.fasta"
+    
+    output:
+        otus_tsv = f"{ROOT_DIR}/results/07_clustering/otus.tsv",
+        otus_fasta = f"{ROOT_DIR}/results/07_clustering/outs.fasta",
+        final_uchime = f"{ROOT_DIR}/results/07_clustering/final.uchime"
+    
+    params:
+        vsearch = f"{ROOT_DIR}/bin/vsearch_github_bin/bin/vsearch",
+        threads = 6,
+        cluster_log_file = f"{ROOT_DIR}/results/07_clustering/otus.log"
+
+    shell:
+        """
+        print_header () {{
+
+            local message=$1
+
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo $message
+            printf "%.0s=" {{1..80}}
+            echo ""
+        
+        }}
+
+        print_header "Final Clustering"
+
+        # Perfrom final clustering
+        {params.vsearch} \
+            --cluster_size {input.all_non_chimeras_renamed_fasta} \
+            --threads {params.threads} \
+            --id 0.97 \
+            --strand plus \
+            --sizein \
+            --sizeout \
+            --fasta_width 0 \
+            --relabel OTU_ \
+            --mintsize 3 \
+            --uc {output.final_uchime} \
+            --centroids {output.otus_fasta}\
+            --otutabout {output.otus_tsv} > {params.cluster_log_file} 2>&1
+
+        echo "Done"
+
+        """
+
+rule rdp_classification:
+    input: 
+        # Otus fasta
+        otus_fasta = f"{ROOT_DIR}/results/07_clustering/outs.fasta"
+    output: 
+        all_significant = f"{ROOT_DIR}/results/07_clustering/all.significant",
+        all_fixedrank = f"{ROOT_DIR}/results/07_clustering/all.fixedRank"
+
+    params:
+        rdp_classifier = RDP_CLASSIFIER
+
+    shell:
+        """
+        print_header () {{
+
+            local message=$1
+
+            echo ""
+            printf "%.0s=" {{1..80}}
+            echo ""
+            echo $message
+            printf "%.0s=" {{1..80}}
+            echo ""
+        
+        }}
+
+        print_header "RDP Classification"
+
+        java -Xmx1g -jar {params.rdp_classifier} \
+            -c 0.8 \
+            -f fixrank \
+            -o {output.all_fixedrank} \
+            -h {output.all_significant} \
+            {input.otus_fasta}
+        """ 

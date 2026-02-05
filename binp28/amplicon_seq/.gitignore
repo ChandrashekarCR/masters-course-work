@@ -1,0 +1,11 @@
+# Ignore the bin files
+/bin
+
+# Ignore the data files
+/data
+
+# Ignore the results files
+/results
+
+# Ignore the snakemake cache files
+.snakemake
