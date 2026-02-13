@@ -30,8 +30,7 @@ SHELL := bash
 .DELETE_ON_ERROR:
 
 
-
-download: # Download the required files from the course servver
+download: # Download the required files from the course server
 	@if [ ! -d data/ ]; then \
 		echo "data folder does not exists.."; \
 		echo "Create the data folder."; \
@@ -55,7 +54,7 @@ apptainer-install: $(FASTQC_IMG) $(TRIMMOMATIC_IMG) $(VSEARCH_IMG) $(PANDASEQ_IM
 
 
 # Rules to pull the images from Sequera and docker
-# $@ -> means that it checks for the target file, in this case it would be the fastqc.sif
+# $@ -> means that it checks for the target file, in this case it would be the fastqc.sif, or timmomatic.sif etc.
 $(FASTQC_IMG):
 
 	@if [ ! -d "$(IMG_DIR)" ]; then \

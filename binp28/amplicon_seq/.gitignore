@@ -9,3 +9,6 @@
 
 # Ignore the snakemake cache files
 .snakemake
+
+# Ignore the exercise answer files
+exercise.md
